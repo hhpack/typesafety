@@ -28,7 +28,19 @@ describe('Result', function() {
         $this->resultObject = $resultObject;
         $this->result = Result::fromObject($resultObject);
     });
-    describe('getErrors', function() {
+    describe('#getVersion', function() {
+        it('return version text', function() {
+            expect($this->result->getVersion())->toBe("817b3a0 Nov 15 2014 13:25:51");
+        });
+    });
+    describe('#isPassed', function() {
+        context('when passed', function() {
+            it('return true', function() {
+                expect($this->result->isPassed())->toBeTrue();
+            });
+        });
+    });
+    describe('#getErrors', function() {
         it('return Iterator<Error> instance', function() {
             expect($this->result->getErrors())->toBeAnInstanceOf(Iterator::class);
         });

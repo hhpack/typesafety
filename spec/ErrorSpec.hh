@@ -21,7 +21,7 @@ describe('Error', function() {
         $this->errorObject = $errorObject;
         $this->error = Error::fromObject($errorObject);
     });
-    describe('getMessages', function() {
+    describe('#getMessages', function() {
         it('return Iterator<Message> instance', function() {
             expect($this->error->getMessages())->toBeAnInstanceOf(Iterator::class);
         });

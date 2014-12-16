@@ -17,6 +17,16 @@ class Result
         $this->errors = new ImmVector($errors);
     }
 
+    public function isPassed() : bool
+    {
+        return $this->passed;
+    }
+
+    public function getVersion() : Version
+    {
+        return $this->version;
+    }
+
     public function getErrors() : Iterator<Error>
     {
         return $this->errors->getIterator();
