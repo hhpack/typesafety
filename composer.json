@@ -1,0 +1,26 @@
+{
+  "name": "typesafety/typesafety",
+  "keywords": [],
+  "description": "",
+  "require": {
+    "hhvm": "~3.4"
+  },
+  "require-dev": {
+    "peridot-php/peridot": "~1.8",
+    "expectation/peridot-expectation": "~1.2"
+  },
+  "autoload": {
+    "psr-4": { "typesafety\\": "src/" }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Noritaka Horio",
+      "email": "holy.shared.design@gmail.com"
+    }
+  ],
+  "scripts": {
+    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh"
+  },
+  "minimum-stability": "stable"
+}
