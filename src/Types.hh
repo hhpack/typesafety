@@ -5,7 +5,8 @@ namespace typesafety;
 use ImmVector;
 
 type Version = string;
-type Errors = ImmVector<Error>;
+type Errors = Traversable<Error>;
+type ImmutableErrors = ImmVector<Error>;
 type Messages = Traversable<Message>;
 type ImmutableMessages = ImmVector<Message>;
 type Path = string;
