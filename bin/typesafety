@@ -1,0 +1,32 @@
+#!/usr/bin/env hhvm
+<?hh //partial
+
+$autoloadFiles = [
+    __DIR__ . '/../vendor/autoload.php',
+    realpath(__DIR__ . '/../../../../')
+];
+
+$composerInstall = false;
+foreach ($autoloadFiles as $autoloadFile) {
+    if (file_exists($autoloadFile) === false) {
+        continue;
+    }
+    require $autoloadFile;
+    $composerInstall = true;
+    break;
+}
+
+if (!$composerInstall) {
+    echo 'You must set up the dependencies, run the following commands:'. PHP_EOL .
+        'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL;
+    exit(1);
+}
+
+unset($composerInstall, $autoloadFiles, $autoloadFile);
+
+use typesafety\Application;
+use typesafety\TextReporter;
+
+$application = new Application(new TextReporter());
+$application->run($argv);
