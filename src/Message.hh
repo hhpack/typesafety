@@ -49,8 +49,9 @@ class Message
 
     public static function fromObject(stdClass $message) : Message
     {
-        $position = new FilePosition($message->line, $message->start, $message->end);
-        $file = new File($message->path, $position);
+        $columnRange = new ColumnRange($message->start, $message->end);
+        $filePosition = new FilePosition($message->line, $columnRange);
+        $file = new File($message->path, $filePosition);
 
         return new Message($message->code, $message->descr, $file);
     }

@@ -8,8 +8,7 @@ class FilePosition
     public function __construct
     (
         private LineNumber $lineNumber,
-        private ColumnNumber $startColumnNumber,
-        private ColumnNumber $endColumnNumber
+        private ColumnRange $columnRange
     )
     {
     }
@@ -21,12 +20,12 @@ class FilePosition
 
     public function getStartColumnNumber() : ColumnNumber
     {
-        return $this->startColumnNumber;
+        return $this->columnRange->getStartColumnNumber();
     }
 
     public function getEndColumnNumber() : ColumnNumber
     {
-        return $this->endColumnNumber;
+        return $this->columnRange->getEndColumnNumber();
     }
 
 }
