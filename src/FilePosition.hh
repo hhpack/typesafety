@@ -14,4 +14,19 @@ class FilePosition
     {
     }
 
+    public function getLineNumber() : LineNumber
+    {
+        return $this->lineNumber;
+    }
+
+    public function getStartColumnNumber() : ColumnNumber
+    {
+        return $this->startColumnNumber;
+    }
+
+    public function getEndColumnNumber() : ColumnNumber
+    {
+        return $this->endColumnNumber;
+    }
+
 }
