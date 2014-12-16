@@ -39,6 +39,15 @@ describe('Result', function() {
                 expect($this->result->isPassed())->toBeTrue();
             });
         });
+        context('when failed', function() {
+            beforeEach(function() {
+                $this->resultObject->passed = false;
+                $this->failedResult = Result::fromObject($this->resultObject);
+            });
+            it('return true', function() {
+                expect($this->failedResult->isPassed())->toBeFalse();
+            });
+        });
     });
     describe('#getErrors', function() {
         it('return Iterator<Error> instance', function() {
