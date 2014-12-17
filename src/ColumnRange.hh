@@ -2,7 +2,6 @@
 
 namespace typesafety;
 
-
 class ColumnRange
 {
 

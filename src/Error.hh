@@ -20,10 +20,16 @@ class Error
         return $this->messages->getIterator();
     }
 
-    public static function fromObject(stdClass $error) : Error
+    public static function fromObject(stdClass $errorObject) : Error
     {
-        $messages = $error->messages;
-        return new Error($messages);
+        $messages = Vector {};
+
+        foreach ($errorObject->message as $messageObject) {
+            $message = Message::fromObject($messageObject);
+            $messages->add($message);
+        }
+
+        return new Error($messages->getIterator());
     }
 
 }

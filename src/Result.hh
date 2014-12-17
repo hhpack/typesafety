@@ -2,6 +2,9 @@
 
 namespace typesafety;
 
+use \stdClass;
+
+
 class Result
 {
 
@@ -34,10 +37,17 @@ class Result
 
     public static function fromObject(stdClass $result) : Result
     {
+        $errors = Vector {};
+
+        foreach ($result->errors as $errorObject) {
+            $error = Error::fromObject($errorObject);
+            $errors->add($error);
+        }
+
         return new Result(
             $result->passed,
             $result->version,
-            $result->errors
+            $errors->getIterator()
         );
     }
 

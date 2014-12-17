@@ -14,7 +14,7 @@ describe('Error', function() {
         $message->start = 26;
 
         $errorObject = new stdClass();
-        $errorObject->messages = [
+        $errorObject->message = [
             $message
         ];
 
