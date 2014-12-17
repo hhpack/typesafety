@@ -44,7 +44,7 @@ describe('Result', function() {
                 $this->resultObject->passed = false;
                 $this->failedResult = Result::fromObject($this->resultObject);
             });
-            it('return true', function() {
+            it('return false', function() {
                 expect($this->failedResult->isPassed())->toBeFalse();
             });
         });
