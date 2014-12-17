@@ -2,8 +2,6 @@
 
 namespace typesafety;
 
-use ImmVector;
-
 type Version = string;
 type Errors = Traversable<Error>;
 type ImmutableErrors = ImmVector<Error>;

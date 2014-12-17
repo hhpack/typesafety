@@ -10,7 +10,12 @@
     "expectation/peridot-expectation": "~1.2"
   },
   "autoload": {
-    "psr-4": { "typesafety\\": "src/" }
+    "psr-4": {
+      "typesafety\\": "src/"
+    },
+    "files": [
+      "src/Types.hh"
+    ]
   },
   "license": "MIT",
   "authors": [
