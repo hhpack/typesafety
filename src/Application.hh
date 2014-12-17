@@ -27,7 +27,7 @@ class Application
         $jsonObject = json_decode(file_get_contents($jsonReportFile));
 
         $result = Result::fromObject($jsonObject);
-        $this->reporter-onStop($result);
+        $this->reporter->onStop($result);
     }
 
 }

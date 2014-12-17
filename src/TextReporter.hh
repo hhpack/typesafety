@@ -35,7 +35,7 @@ class TextReporter implements Listener
         $messages = $error->getMessages();
 
         foreach ($messages as $message) {
-            $this->displayMessage($error);
+            $this->displayMessage($message);
         }
     }
 
