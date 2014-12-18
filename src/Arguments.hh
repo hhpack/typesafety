@@ -3,7 +3,7 @@
 namespace typesafety;
 
 
-class Arguments
+final class Arguments
 {
 
     private ImmVector<string> $argv;

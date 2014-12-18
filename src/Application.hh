@@ -5,7 +5,7 @@ namespace typesafety;
 use \RuntimeException;
 
 
-class Application
+final class Application
 {
 
     public function __construct

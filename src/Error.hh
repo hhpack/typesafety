@@ -5,7 +5,7 @@ namespace typesafety;
 use \stdClass;
 
 
-class Error
+final class Error
 {
 
     private ImmutableMessages $messages;

@@ -2,7 +2,7 @@
 
 namespace typesafety;
 
-class ColumnRange
+final class ColumnRange
 {
 
     public function __construct

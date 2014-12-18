@@ -2,7 +2,7 @@
 
 namespace typesafety;
 
-class FilePosition
+final class FilePosition
 {
 
     public function __construct

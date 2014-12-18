@@ -3,7 +3,7 @@
 namespace typesafety;
 
 
-class Context
+final class Context
 {
 
     public function __construct

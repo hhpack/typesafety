@@ -3,7 +3,7 @@
 namespace typesafety;
 
 
-class TextReporter implements Listener
+final class TextReporter implements Listener
 {
 
     public function onStop(Result $result) : void

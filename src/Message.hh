@@ -5,7 +5,7 @@ namespace typesafety;
 use \stdClass;
 
 
-class Message
+final class Message
 {
 
     public function __construct

@@ -5,7 +5,7 @@ namespace typesafety;
 use \stdClass;
 
 
-class Result
+final class Result
 {
 
     private ImmutableErrors $errors;

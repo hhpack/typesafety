@@ -3,7 +3,7 @@
 namespace typesafety;
 
 
-class File
+final class File
 {
 
     public function __construct
