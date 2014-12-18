@@ -26,4 +26,23 @@ describe('Error', function() {
             expect($this->error->getMessages())->toBeAnInstanceOf(Iterator::class);
         });
     });
+    describe('#hasMessages', function() {
+        context('when there is an error message', function() {
+            it('return true', function() {
+                expect($this->error->hasMessages())->toBeTrue();
+            });
+        });
+        context('when there is no message', function() {
+            beforeEach(function() {
+                $errorObject = new stdClass();
+                $errorObject->message = [];
+
+                $this->errorObject = $errorObject;
+                $this->error = Error::fromObject($errorObject);
+            });
+            it('return false', function() {
+                expect($this->error->hasMessages())->toBeFalse();
+            });
+        });
+    });
 });

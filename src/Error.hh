@@ -20,6 +20,11 @@ class Error
         return $this->messages->getIterator();
     }
 
+    public function hasMessages() : bool
+    {
+        return $this->messages->isEmpty() === false;
+    }
+
     public static function fromObject(stdClass $errorObject) : Error
     {
         $messages = Vector {};
