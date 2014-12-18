@@ -54,4 +54,21 @@ describe('Result', function() {
             expect($this->result->getErrors())->toBeAnInstanceOf(Iterator::class);
         });
     });
+    describe('#hasErrors', function() {
+        context('when there is no error', function() {
+            beforeEach(function() {
+                $this->resultObject->passed = true;
+                $this->resultObject->errors = [];
+                $this->passedResult = Result::fromObject($this->resultObject);
+            });
+            it('return false', function() {
+                expect($this->passedResult->hasErrors())->toBeFalse();
+            });
+        });
+        context('when there is an error', function() {
+            it('return true', function() {
+                expect($this->result->hasErrors())->toBeTrue();
+            });
+        });
+    });
 });

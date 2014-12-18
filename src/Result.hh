@@ -35,6 +35,11 @@ class Result
         return $this->errors->getIterator();
     }
 
+    public function hasErrors() : bool
+    {
+        return $this->errors->isEmpty() === false;
+    }
+
     public static function fromObject(stdClass $result) : Result
     {
         $errors = Vector {};
