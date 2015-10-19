@@ -1,13 +1,9 @@
 language: php
 php:
-    - "hhvm"
-    - "hhvm-nightly"
-matrix:
-  fast_finish: true
-  allow_failures:
-    - php: hhvm
+  - "hhvm"
 before_script:
-    - composer self-update
-    - composer install --prefer-source
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction --prefer-source
 script:
-    - composer test
+  - composer test
+sudo: false
