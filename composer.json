@@ -2,28 +2,29 @@
   "name": "typesafety/typesafety",
   "keywords": [],
   "description": "",
-  "require": {
-    "hhvm": "~3.4"
-  },
-  "require-dev": {
-    "peridot-php/peridot": "~1.8",
-    "expectation/peridot-expectation": "~1.2"
-  },
-  "autoload": {
-    "psr-4": {
-      "typesafety\\": "src/"
-    },
-    "files": [
-      "src/Types.hh"
-    ]
-  },
-  "license": "MIT",
   "authors": [
     {
       "name": "Noritaka Horio",
       "email": "holy.shared.design@gmail.com"
     }
   ],
+  "license": "MIT",
+  "require": {
+    "hhvm": ">=3.6"
+  },
+  "require-dev": {
+    "expect/peridot-expect-plugin": "~3.0",
+    "peridot-php/peridot": "~1.15",
+    "peridot-php/peridot-dot-reporter": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "typesafety\\": "src/"
+    },
+    "files": [
+      "src/bootstrap.hh"
+    ]
+  },
   "scripts": {
     "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh"
   },
