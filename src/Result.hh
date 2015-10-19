@@ -5,7 +5,7 @@ namespace typesafety;
 use \stdClass;
 
 
-final class Result
+final class Result implements Node<Result>
 {
 
     private ImmutableErrors $errors;
