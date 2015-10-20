@@ -19,6 +19,7 @@ final class TextReporter implements Listener
         } else {
             echo "Typing check failed", PHP_EOL;
         }
+        echo PHP_EOL;
     }
 
     private function displayErrors(Result $result) : void
@@ -41,15 +42,22 @@ final class TextReporter implements Listener
 
     private function displayMessage(Message $message) : void
     {
-        echo $message->getPath(), PHP_EOL;
-        echo $message->getDescription(), PHP_EOL;
+        echo $message->getPath(), PHP_EOL, PHP_EOL;
+
+        $description = $message->getDescription();
+        $texts = explode(PHP_EOL, $description);
+
+        foreach ($texts as $text) {
+            echo "  ", $text, PHP_EOL;
+        }
+        echo PHP_EOL;
 
         $lineNumber = $message->getLineNumber();
         $startAt = $message->getStartColumnNumber();
         $endAt = $message->getEndColumnNumber();
 
         $content = file_get_contents($message->getPath());
-        $lines = explode("\n", $content);
+        $lines = explode(PHP_EOL, $content);
 
         $record = $lines[$lineNumber - 1];
 
