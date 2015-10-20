@@ -49,11 +49,13 @@ final class TextReporter implements Listener
         $endAt = $message->getEndColumnNumber();
 
         $content = file_get_contents($message->getPath());
-        $lines = explode($content, PHP_EOL);
+        $lines = explode("\n", $content);
 
         $record = $lines[$lineNumber - 1];
+
         $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
-        $stringText = $stringText . str_pad("", strlen($record) - strlen($stringText), " ");
+        $length = $startAt + ($endAt - $startAt);
+        $stringText = str_pad($stringText, $length, "^");
 
         echo "  ", $record, PHP_EOL;
         echo "  ", $stringText, PHP_EOL;
