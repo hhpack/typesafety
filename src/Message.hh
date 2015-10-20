@@ -4,12 +4,10 @@ namespace typesafety;
 
 use \stdClass;
 
-
-final class Message
+final class Message implements Node<Message>
 {
 
-    public function __construct
-    (
+    public function __construct(
         private int $code,
         private string $description,
         private File $file

@@ -5,7 +5,7 @@ namespace typesafety;
 use \stdClass;
 
 
-final class Error
+final class Error implements Node<Error>
 {
 
     private ImmutableMessages $messages;

@@ -5,8 +5,7 @@ namespace typesafety;
 final class FilePosition
 {
 
-    public function __construct
-    (
+    public function __construct(
         private LineNumber $lineNumber,
         private ColumnRange $columnRange
     )
