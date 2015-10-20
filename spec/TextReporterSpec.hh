@@ -6,7 +6,7 @@ use typesafety\TextReporter;
 describe(TextReporter::class, function() {
   beforeEach(function() {
     $content = file_get_contents(__DIR__ . '/fixtures/failed/output.json');
-    $content = str_replace('{$rootDirectory}', realpath(__DIR__ . '/../') , $content);
+    $content = str_replace('{$rootDirectory}', realpath(__DIR__ . '/fixtures/failed') , $content);
     $json = json_decode($content);
     $this->result = Result::fromObject($json);
     $this->reporter = new TextReporter();
