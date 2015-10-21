@@ -11,4 +11,14 @@ final class Console
     {
     }
 
+    public function write(string $text) : void
+    {
+        $this->stdout->write($text);
+    }
+
+    public function writeln(string $text) : void
+    {
+        $this->stdout->writeln($text);
+    }
+
 }
