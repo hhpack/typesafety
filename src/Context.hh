@@ -29,4 +29,11 @@ final class Context implements Writable<string>
         $this->console->writeln($text);
     }
 
+    public static function fromArray(array<string> $argv) : Context
+    {
+        return new Context(
+            Arguments::fromArray($argv)
+        );
+    }
+
 }
