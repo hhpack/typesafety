@@ -8,8 +8,7 @@ final class Arguments
 
     private ImmVector<string> $argv;
 
-    public function __construct
-    (
+    public function __construct(
         Argv $argv
     )
     {
@@ -24,6 +23,11 @@ final class Arguments
     public function getJSONReportFilePath() : Path
     {
         return $this->argv->at((int) ArgumentOrder::JsonReportFilePath);
+    }
+
+    public static function fromArray(array<string> $argv) : Arguments
+    {
+        return new Arguments($argv);
     }
 
 }
