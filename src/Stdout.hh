@@ -2,17 +2,17 @@
 
 namespace typesafety;
 
-final class Stdout
+final class Stdout implements Writable<string>
 {
 
-    public function write(string $text) : void
+    public function write(string $output) : void
     {
-        fwrite(STDOUT, $text);
+        fwrite(STDOUT, $output);
     }
 
-    public function writeln(string $text) : void
+    public function writeln(string $output) : void
     {
-        $this->write($text . PHP_EOL);
+        $this->write($output . PHP_EOL);
     }
 
 }
