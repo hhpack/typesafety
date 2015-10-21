@@ -20,6 +20,7 @@ final class Arguments
         return $this->argv->at((int) ArgumentOrder::ScriptName);
     }
 
+    <<__Deprecated>>
     public function getJSONReportFilePath() : Path
     {
         return $this->argv->at((int) ArgumentOrder::JsonReportFilePath);
