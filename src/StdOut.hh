@@ -2,7 +2,7 @@
 
 namespace typesafety;
 
-final class StdOut
+final class Stdout
 {
 
     public function write(string $text) : void
