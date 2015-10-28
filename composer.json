@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "typesafety\\": "src/"
+      "hhpack\\typesafety\\": "src/"
     },
     "files": [
       "src/bootstrap.hh"

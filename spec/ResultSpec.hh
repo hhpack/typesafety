@@ -1,6 +1,8 @@
 <?hh //partial
 
-use typesafety\Result;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Result;
 use stdClass;
 
 describe('Result', function() {

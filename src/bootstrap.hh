@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace typesafety {
+namespace hhpack\typesafety {
     type Version = string;
     type Errors = Traversable<Error>;
     type ImmutableErrors = ImmVector<Error>;

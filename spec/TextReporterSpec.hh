@@ -1,7 +1,9 @@
 <?hh //partial
 
-use typesafety\Result;
-use typesafety\TextReporter;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Result;
+use hhpack\typesafety\TextReporter;
 
 describe(TextReporter::class, function() {
   beforeEach(function() {

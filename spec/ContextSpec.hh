@@ -1,7 +1,9 @@
 <?hh //partial
 
-use typesafety\Arguments;
-use typesafety\Context;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Arguments;
+use hhpack\typesafety\Context;
 
 describe('Context', function() {
     beforeEach(function() {

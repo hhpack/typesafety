@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace typesafety;
+namespace hhpack\typesafety;
 
 enum ArgumentOrder : int {
     ScriptName = 0;

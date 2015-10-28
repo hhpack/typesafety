@@ -1,6 +1,6 @@
 <?hh //partial
 
-namespace typesafety;
+namespace hhpack\typesafety;
 
 use \RuntimeException;
 
