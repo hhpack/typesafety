@@ -10,7 +10,8 @@
   ],
   "license": "MIT",
   "require": {
-    "hhvm": ">=3.6"
+    "hhvm": ">=3.6",
+    "hhpack/process": "~0.1.0"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
