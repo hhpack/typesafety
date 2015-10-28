@@ -56,4 +56,12 @@ final class Result implements Node<Result>
         );
     }
 
+    public static function fromString(string $result) : Result
+    {
+        $json = preg_replace('/^([^\{]+)|([^\}]+)$/', "", $result);
+        $object = json_decode(trim($json));
+
+        return static::fromObject($object);
+    }
+
 }
