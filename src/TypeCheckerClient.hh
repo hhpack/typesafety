@@ -2,11 +2,20 @@
 
 namespace hhpack\typesafety;
 
+use hhpack\process\Process;
+
 final class TypeCheckerClient implements Client
 {
-    // FIXME implements!!
-    public function check() : Result
+
+    public async function restart(string $cwd = (string) getcwd()) : Awaitable<void>
     {
-        return new Result(true, '817b3a0 Nov 15 2014 13:25:51', []);
+        await Process::exec('hh_client restart');
     }
+
+    public async function check(string $cwd = (string) getcwd()) : Awaitable<Result>
+    {
+        $result = await Process::exec('hh_client check --json');
+        return Result::fromString((string) $result->getStderr());
+    }
+
 }
