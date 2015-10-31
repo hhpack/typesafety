@@ -30,4 +30,4 @@ use hhpack\typesafety\ApplicationContext;
 use hhpack\typesafety\TextReporter;
 
 $application = new Application(new TextReporter());
-$application->run( Context::fromArray($argv) );
+$application->run( ApplicationContext::fromArray($argv) );
