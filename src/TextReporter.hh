@@ -1,10 +1,17 @@
 <?hh //strict
 
-namespace typesafety;
+namespace hhpack\typesafety;
 
 
 final class TextReporter implements Listener
 {
+
+    public function __construct
+    (
+        private Output $output
+    )
+    {
+    }
 
     public function onStop(Result $result) : void
     {
@@ -15,10 +22,11 @@ final class TextReporter implements Listener
     private function displayStatus(Result $result) : void
     {
         if ($result->isPassed()) {
-            echo "Typing check passed", PHP_EOL;
+            $this->output->write('Type check passed.');
         } else {
-            echo "Typing check failed", PHP_EOL;
+            $this->output->writeln('Type check failed.');
         }
+        $this->output->writeln('');
     }
 
     private function displayErrors(Result $result) : void
@@ -41,22 +49,31 @@ final class TextReporter implements Listener
 
     private function displayMessage(Message $message) : void
     {
-        echo $message->getPath(), PHP_EOL;
-        echo $message->getDescription(), PHP_EOL;
+        $this->output->writeln($message->getPath() . PHP_EOL);
+
+        $description = $message->getDescription();
+        $texts = explode(PHP_EOL, $description);
+
+        foreach ($texts as $text) {
+            $this->output->writeln('' . $text);
+        }
+        $this->output->writeln('');
 
         $lineNumber = $message->getLineNumber();
         $startAt = $message->getStartColumnNumber();
         $endAt = $message->getEndColumnNumber();
 
         $content = file_get_contents($message->getPath());
-        $lines = explode($content, PHP_EOL);
+        $lines = explode(PHP_EOL, $content);
 
         $record = $lines[$lineNumber - 1];
-        $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
-        $stringText = $stringText . str_pad("", strlen($record) - strlen($stringText), " ");
 
-        echo "  ", $record, PHP_EOL;
-        echo "  ", $stringText, PHP_EOL;
+        $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
+        $length = $startAt + ($endAt - $startAt);
+        $stringText = str_pad($stringText, $length, "^");
+
+        $this->output->writeln('  ' . $record);
+        $this->output->writeln('  ' . $stringText);
     }
 
 }

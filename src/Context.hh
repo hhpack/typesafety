@@ -1,21 +1,13 @@
 <?hh //strict
 
-namespace typesafety;
+namespace hhpack\typesafety;
 
-
-final class Context
+interface Context
 {
-
-    public function __construct
-    (
-        private Arguments $args
-    )
-    {
-    }
-
-    public function getArguments() : Arguments
-    {
-        return $this->args;
-    }
-
+    public function getArguments() : Arguments;
+    public function started() : void;
+    public function report(Result $result) : void;
+    public function finish() : void;
+    public function terminated(Result $result) : void;
+    public static function fromArray(array<string> $argv) : this;
 }

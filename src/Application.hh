@@ -1,33 +1,28 @@
-<?hh //partial
+<?hh //strict
 
-namespace typesafety;
-
-use \RuntimeException;
-
+namespace hhpack\typesafety;
 
 final class Application
 {
 
-    public function __construct
-    (
-        private TextReporter $reporter
-    )
+    private TypeCheckerClient $client;
+
+    public function __construct()
     {
+        $this->client = new TypeCheckerClient();
     }
 
-    public function run(array $args) : void
+    public async function run(Context $context) : Awaitable<void>
     {
-        $relativeJsonReportFile = $args[1];
-        $jsonReportFile = getcwd() . '/' . $relativeJsonReportFile;
+        $context->started();
 
-        if (file_exists($jsonReportFile) === false) {
-            throw new RuntimeException('JSON report file not found.');
-        }
+        await $this->client->restart();
+        $result = await $this->client->check();
 
-        $jsonObject = json_decode(file_get_contents($jsonReportFile));
+        $context->finish();
 
-        $result = Result::fromObject($jsonObject);
-        $this->reporter->onStop($result);
+        $context->report($result);
+        $context->terminated($result);
     }
 
 }

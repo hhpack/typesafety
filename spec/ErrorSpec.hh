@@ -1,6 +1,8 @@
 <?hh //partial
 
-use typesafety\Error;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Error;
 use stdClass;
 
 describe('Error', function() {

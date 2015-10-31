@@ -1,6 +1,6 @@
 <?hh //strict
 
-namespace typesafety;
+namespace hhpack\typesafety;
 
 
 final class Arguments
@@ -8,8 +8,7 @@ final class Arguments
 
     private ImmVector<string> $argv;
 
-    public function __construct
-    (
+    public function __construct(
         Argv $argv
     )
     {
@@ -18,12 +17,12 @@ final class Arguments
 
     public function getScriptName() : ScriptName
     {
-        return $this->argv->at((int) ArgumentOrder::ScriptName);
+        return $this->argv->at(0);
     }
 
-    public function getJSONReportFilePath() : Path
+    public static function fromArray(array<string> $argv) : Arguments
     {
-        return $this->argv->at((int) ArgumentOrder::JsonReportFilePath);
+        return new Arguments($argv);
     }
 
 }

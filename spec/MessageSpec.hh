@@ -1,6 +1,8 @@
 <?hh //partial
 
-use typesafety\Message;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Message;
 use stdClass;
 
 describe('Message', function() {

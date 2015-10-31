@@ -10,7 +10,8 @@
   ],
   "license": "MIT",
   "require": {
-    "hhvm": ">=3.6"
+    "hhvm": ">=3.6",
+    "hhpack/process": "~0.1.0"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
@@ -19,14 +20,15 @@
   },
   "autoload": {
     "psr-4": {
-      "typesafety\\": "src/"
+      "hhpack\\typesafety\\": "src/"
     },
     "files": [
       "src/bootstrap.hh"
     ]
   },
   "scripts": {
-    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh"
+    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh",
+    "check": "bin/typesafety"
   },
   "minimum-stability": "stable"
 }

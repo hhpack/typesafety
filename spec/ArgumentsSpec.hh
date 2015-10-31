@@ -1,6 +1,8 @@
 <?hh //partial
 
-use typesafety\Arguments;
+namespace hhpack\typesafety\spec;
+
+use hhpack\typesafety\Arguments;
 
 describe('Arguments', function() {
     beforeEach(function() {
