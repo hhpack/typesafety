@@ -17,13 +17,7 @@ final class Arguments
 
     public function getScriptName() : ScriptName
     {
-        return $this->argv->at((int) ArgumentOrder::ScriptName);
-    }
-
-    <<__Deprecated('getJSONReportFilePath is no longer required')>>
-    public function getJSONReportFilePath() : Path
-    {
-        return $this->argv->at((int) ArgumentOrder::JsonReportFilePath);
+        return $this->argv->at(0);
     }
 
     public static function fromArray(array<string> $argv) : Arguments
