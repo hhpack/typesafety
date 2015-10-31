@@ -2,16 +2,12 @@
 
 namespace hhpack\typesafety;
 
-
 final class Application
 {
 
     private TypeCheckerClient $client;
 
-    public function __construct
-    (
-        private TextReporter $reporter
-    )
+    public function __construct()
     {
         $this->client = new TypeCheckerClient();
     }
@@ -20,7 +16,8 @@ final class Application
     {
         await $this->client->restart();
         $result = await $this->client->check();
-        $this->reporter->onStop($result);
+
+        $context->report($result);
     }
 
 }

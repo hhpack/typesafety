@@ -23,6 +23,12 @@ final class ApplicationContext implements Context
         return $this->output;
     }
 
+    public function report(Result $result) : void
+    {
+        $reporter = new TextReporter($this->output);
+        $reporter->onStop($result);
+    }
+
     public static function fromArray(array<string> $argv) : this
     {
         return new static(

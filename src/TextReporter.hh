@@ -6,6 +6,13 @@ namespace hhpack\typesafety;
 final class TextReporter implements Listener
 {
 
+    public function __construct
+    (
+        private Output $output
+    )
+    {
+    }
+
     public function onStop(Result $result) : void
     {
         $this->displayStatus($result);
@@ -15,11 +22,11 @@ final class TextReporter implements Listener
     private function displayStatus(Result $result) : void
     {
         if ($result->isPassed()) {
-            echo "Typing check passed", PHP_EOL;
+            $this->output->writeln('Typing check passed');
         } else {
-            echo "Typing check failed", PHP_EOL;
+            $this->output->writeln('Typing check failed');
         }
-        echo PHP_EOL;
+        $this->output->writeln('');
     }
 
     private function displayErrors(Result $result) : void
@@ -42,15 +49,15 @@ final class TextReporter implements Listener
 
     private function displayMessage(Message $message) : void
     {
-        echo $message->getPath(), PHP_EOL, PHP_EOL;
+        $this->output->writeln($message->getPath() . PHP_EOL);
 
         $description = $message->getDescription();
         $texts = explode(PHP_EOL, $description);
 
         foreach ($texts as $text) {
-            echo "  ", $text, PHP_EOL;
+            $this->output->writeln('' . $text);
         }
-        echo PHP_EOL;
+        $this->output->writeln('');
 
         $lineNumber = $message->getLineNumber();
         $startAt = $message->getStartColumnNumber();
@@ -65,8 +72,8 @@ final class TextReporter implements Listener
         $length = $startAt + ($endAt - $startAt);
         $stringText = str_pad($stringText, $length, "^");
 
-        echo "  ", $record, PHP_EOL;
-        echo "  ", $stringText, PHP_EOL;
+        $this->output->writeln('  ' . $record);
+        $this->output->writeln('  ' . $stringText);
     }
 
 }
