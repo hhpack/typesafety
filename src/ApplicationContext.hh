@@ -18,11 +18,6 @@ final class ApplicationContext implements Context
         return $this->args;
     }
 
-    public function getOutput() : Output
-    {
-        return $this->output;
-    }
-
     public function report(Result $result) : void
     {
         $reporter = new TextReporter($this->output);
