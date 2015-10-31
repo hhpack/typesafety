@@ -26,7 +26,8 @@ if (!$composerInstall) {
 unset($composerInstall, $autoloadFiles, $autoloadFile);
 
 use hhpack\typesafety\Application;
+use hhpack\typesafety\Context;
 use hhpack\typesafety\TextReporter;
 
 $application = new Application(new TextReporter());
-$application->run($argv);
+$application->run( Context::fromArray($argv) );

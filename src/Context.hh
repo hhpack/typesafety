@@ -3,7 +3,7 @@
 namespace hhpack\typesafety;
 
 
-final class Context implements Writable<string>
+final class Context
 {
 
     public function __construct
@@ -19,14 +19,9 @@ final class Context implements Writable<string>
         return $this->args;
     }
 
-    public function write(string $text) : void
+    public function getConsoleOutput() : Console
     {
-        $this->console->write($text);
-    }
-
-    public function writeln(string $text) : void
-    {
-        $this->console->writeln($text);
+        return $this->console;
     }
 
     public static function fromArray(array<string> $argv) : Context

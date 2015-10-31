@@ -16,7 +16,7 @@ final class Application
         $this->client = new TypeCheckerClient();
     }
 
-    public async function run(Iterable<string> $args) : Awaitable<void>
+    public async function run(Context $context) : Awaitable<void>
     {
         await $this->client->restart();
         $result = await $this->client->check();
