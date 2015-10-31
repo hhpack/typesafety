@@ -22,9 +22,9 @@ final class TextReporter implements Listener
     private function displayStatus(Result $result) : void
     {
         if ($result->isPassed()) {
-            $this->output->writeln('Typing check passed');
+            $this->output->write('Type check passed.');
         } else {
-            $this->output->writeln('Typing check failed');
+            $this->output->writeln('Type check failed.');
         }
         $this->output->writeln('');
     }

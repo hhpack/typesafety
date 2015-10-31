@@ -18,10 +18,20 @@ final class ApplicationContext implements Context
         return $this->args;
     }
 
+    public function started() : void
+    {
+        $this->output->writeln('Type check started.');
+    }
+
     public function report(Result $result) : void
     {
         $reporter = new TextReporter($this->output);
         $reporter->onStop($result);
+    }
+
+    public function finish() : void
+    {
+        $this->output->writeln('Type check finished.');
     }
 
     public function terminated(Result $result) : void
