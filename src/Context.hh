@@ -2,10 +2,9 @@
 
 namespace hhpack\typesafety;
 
-
 interface Context
 {
     public function getArguments() : Arguments;
-    public function getConsoleOutput() : Console;
+    public function getOutput() : Output;
     public static function fromArray(array<string> $argv) : this;
 }

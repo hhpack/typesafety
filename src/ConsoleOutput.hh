@@ -2,7 +2,7 @@
 
 namespace hhpack\typesafety;
 
-final class Console
+final class ConsoleOutput implements Writable<string>
 {
 
     public function __construct(

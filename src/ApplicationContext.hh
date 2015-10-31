@@ -8,7 +8,7 @@ final class ApplicationContext implements Context
     public function __construct
     (
         private Arguments $args,
-        private Console $console = new Console()
+        private Output $output = new ConsoleOutput()
     )
     {
     }
@@ -18,9 +18,9 @@ final class ApplicationContext implements Context
         return $this->args;
     }
 
-    public function getConsoleOutput() : Console
+    public function getOutput() : Output
     {
-        return $this->console;
+        return $this->output;
     }
 
     public static function fromArray(array<string> $argv) : this

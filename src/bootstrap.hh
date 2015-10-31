@@ -11,4 +11,6 @@ namespace hhpack\typesafety {
     type LineNumber = int;
     type ColumnNumber = int;
     type Argv = Traversable<string>;
+
+    type Output = Writable<string>;
 }
