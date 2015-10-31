@@ -24,6 +24,12 @@ final class ApplicationContext implements Context
         $reporter->onStop($result);
     }
 
+    public function terminated(Result $result) : void
+    {
+        $exitCode = $result->isPassed() ? 0 : -1;
+        exit($exitCode);
+    }
+
     public static function fromArray(array<string> $argv) : this
     {
         return new static(

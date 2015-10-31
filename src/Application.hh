@@ -18,6 +18,7 @@ final class Application
         $result = await $this->client->check();
 
         $context->report($result);
+        $context->terminated($result);
     }
 
 }
