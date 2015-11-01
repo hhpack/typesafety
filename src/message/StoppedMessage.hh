@@ -13,6 +13,8 @@ namespace hhpack\typesafety\message;
 
 use hhpack\publisher\Message;
 use hhpack\typechecker\check\Result;
+use hhpack\typechecker\check\Error;
+use Generator;
 
 final class StoppedMessage implements Message
 {
@@ -21,6 +23,23 @@ final class StoppedMessage implements Message
         private Result $result
     )
     {
+    }
+
+    public function isPassed() : bool
+    {
+        return $this->result->isPassed();
+    }
+
+    public function isFailed() : bool
+    {
+        return $this->result->isPassed() === false;
+    }
+
+    public function errors() : Generator<int, Error, void>
+    {
+        foreach ($this->result->getErrors() as $error) {
+            yield $error;
+        }
     }
 
 }
