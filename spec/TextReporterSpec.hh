@@ -2,7 +2,7 @@
 
 namespace hhpack\typesafety\spec;
 
-use hhpack\typesafety\Result;
+use hhpack\typechecker\check\Result;
 use hhpack\typesafety\TextReporter;
 use hhpack\typesafety\ConsoleOutput;
 

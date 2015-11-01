@@ -29,6 +29,17 @@ final class Arguments
         return $this->argv->at(0);
     }
 
+    public function getRootDirectory() : Path
+    {
+        $directory = $this->argv->get(1);
+
+        if ($directory === null) {
+            $directory = (string) getcwd();
+        }
+
+        return $directory;
+    }
+
     public static function fromArray(array<string> $argv) : this
     {
         return new static($argv);
