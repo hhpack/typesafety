@@ -12,13 +12,11 @@
 namespace hhpack\typesafety;
 
 use hhpack\typechecker\check\Result;
+use hhpack\publisher\Message as TypeCheckMessage;
+use hhpack\typesafety\message\StoppedMessage;
+use hhpack\publisher\Subscribable;
 
-interface Context
+interface Reporter extends Subscribable<TypeCheckMessage>
 {
-    public function getArguments() : Arguments;
-    public function started() : void;
-    public function report(Result $result) : void;
-    public function finish() : void;
-    public function terminated(Result $result) : void;
-    public static function fromArray(array<string> $argv) : this;
+    public function onStop(StoppedMessage $message) : void;
 }

@@ -1,9 +1,25 @@
 <?hh //strict
 
-namespace hhpack\typesafety;
+/**
+ * This file is part of hhpack\typesafety package.
+ *
+ * (c) Noritaka Horio <holy.shared.design@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
+namespace hhpack\typesafety\reporter;
 
-final class TextReporter implements Listener
+use hhpack\typechecker\check\Result;
+use hhpack\typechecker\check\Error;
+use hhpack\typechecker\check\Message;
+use hhpack\publisher\Message as TypeCheckMessage;
+use hhpack\publisher\Subscribable;
+use hhpack\typesafety\message\StoppedMessage;
+use hhpack\typesafety\Reporter;
+
+final class TextReporter implements Reporter
 {
 
     public function __construct
@@ -13,15 +29,15 @@ final class TextReporter implements Listener
     {
     }
 
-    public function onStop(Result $result) : void
+    public function onStop(StoppedMessage $message) : void
     {
-        $this->displayStatus($result);
-        $this->displayErrors($result);
+        $this->displayStatus($message);
+        $this->displayErrors($message);
     }
 
-    private function displayStatus(Result $result) : void
+    private function displayStatus(StoppedMessage $message) : void
     {
-        if ($result->isPassed()) {
+        if ($message->isPassed()) {
             $this->output->write('Type check passed.');
         } else {
             $this->output->writeln('Type check failed.');
@@ -29,11 +45,11 @@ final class TextReporter implements Listener
         $this->output->writeln('');
     }
 
-    private function displayErrors(Result $result) : void
+    private function displayErrors(StoppedMessage $message) : void
     {
-        $errors = $result->getErrors();
+//        $errors = $result->getErrors();
 
-        foreach ($errors as $error) {
+        foreach ($message->errors() as $error) {
             $this->displayError($error);
         }
     }
