@@ -19,7 +19,7 @@ use hhpack\publisher\Subscribable;
 use hhpack\typesafety\message\StoppedMessage;
 
 
-final class TextReporter implements Subscribable<TypeCheckMessage>
+final class TextReporter implements Reporter
 {
 
     public function __construct
