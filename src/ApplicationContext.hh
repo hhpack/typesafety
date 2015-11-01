@@ -12,6 +12,7 @@
 namespace hhpack\typesafety;
 
 use hhpack\typechecker\check\Result;
+use hhpack\typesafety\message\StoppedMessage;
 
 final class ApplicationContext implements Context
 {
@@ -37,7 +38,7 @@ final class ApplicationContext implements Context
     public function report(Result $result) : void
     {
         $reporter = new TextReporter($this->output);
-        $reporter->onStop($result);
+        $reporter->onStop(new StoppedMessage($result));
     }
 
     public function finish() : void

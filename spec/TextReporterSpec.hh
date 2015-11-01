@@ -4,6 +4,7 @@ namespace hhpack\typesafety\spec;
 
 use hhpack\typechecker\check\Result;
 use hhpack\typesafety\TextReporter;
+use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\ConsoleOutput;
 
 describe(TextReporter::class, function() {
@@ -16,7 +17,7 @@ describe(TextReporter::class, function() {
   });
   describe('onStop()', function() {
     it('display type check report', function () {
-      $this->reporter->onStop($this->result);
+      $this->reporter->onStop(new StoppedMessage($this->result));
     });
   });
 });

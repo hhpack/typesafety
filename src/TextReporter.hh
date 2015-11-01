@@ -14,8 +14,12 @@ namespace hhpack\typesafety;
 use hhpack\typechecker\check\Result;
 use hhpack\typechecker\check\Error;
 use hhpack\typechecker\check\Message;
+use hhpack\publisher\Message as TypeCheckMessage;
+use hhpack\publisher\Subscribable;
+use hhpack\typesafety\message\StoppedMessage;
 
-final class TextReporter implements Listener
+
+final class TextReporter implements Subscribable<TypeCheckMessage>
 {
 
     public function __construct
@@ -25,15 +29,15 @@ final class TextReporter implements Listener
     {
     }
 
-    public function onStop(Result $result) : void
+    public function onStop(StoppedMessage $message) : void
     {
-        $this->displayStatus($result);
-        $this->displayErrors($result);
+        $this->displayStatus($message);
+        $this->displayErrors($message);
     }
 
-    private function displayStatus(Result $result) : void
+    private function displayStatus(StoppedMessage $message) : void
     {
-        if ($result->isPassed()) {
+        if ($message->isPassed()) {
             $this->output->write('Type check passed.');
         } else {
             $this->output->writeln('Type check failed.');
@@ -41,11 +45,11 @@ final class TextReporter implements Listener
         $this->output->writeln('');
     }
 
-    private function displayErrors(Result $result) : void
+    private function displayErrors(StoppedMessage $message) : void
     {
-        $errors = $result->getErrors();
+//        $errors = $result->getErrors();
 
-        foreach ($errors as $error) {
+        foreach ($message->errors() as $error) {
             $this->displayError($error);
         }
     }
