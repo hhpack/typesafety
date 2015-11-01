@@ -29,9 +29,9 @@ final class Arguments
         return $this->argv->at(0);
     }
 
-    public static function fromArray(array<string> $argv) : Arguments
+    public static function fromArray(array<string> $argv) : this
     {
-        return new Arguments($argv);
+        return new static($argv);
     }
 
 }
