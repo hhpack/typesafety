@@ -9,7 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety;
+namespace hhpack\typesafety\output;
+
+use hhpack\typesafety\Writable;
 
 final class Stdout implements Writable<string>
 {
