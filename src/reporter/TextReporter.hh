@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety;
+namespace hhpack\typesafety\reporter;
 
 use hhpack\typechecker\check\Result;
 use hhpack\typechecker\check\Error;
@@ -17,7 +17,7 @@ use hhpack\typechecker\check\Message;
 use hhpack\publisher\Message as TypeCheckMessage;
 use hhpack\publisher\Subscribable;
 use hhpack\typesafety\message\StoppedMessage;
-
+use hhpack\typesafety\Reporter;
 
 final class TextReporter implements Reporter
 {

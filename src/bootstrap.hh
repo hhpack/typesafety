@@ -15,6 +15,11 @@ namespace hhpack\typesafety
     type ScriptName = string;
     type Argv = Traversable<string>;
     type Output = Writable<string>;
-    //type Reporter = Listener;
-    
+}
+
+namespace hhpack\typesafety\reporter
+{
+    use hhpack\typesafety\Writable;
+
+    type Output = Writable<string>;
 }
