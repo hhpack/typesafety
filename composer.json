@@ -1,7 +1,7 @@
 {
   "name": "hhpack/typesafety",
-  "keywords": [],
-  "description": "",
+  "keywords": [ "type checker", "hhvm", "hack", "hh_client" ],
+  "description": "Type checking for CI",
   "authors": [
     {
       "name": "Noritaka Horio",
@@ -11,7 +11,7 @@
   "license": "MIT",
   "require": {
     "hhvm": ">=3.6",
-    "hhpack/process": "~0.1.0"
+    "hhpack/typechecker-client": "~0.1.0"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
@@ -27,7 +27,7 @@
     ]
   },
   "scripts": {
-    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh",
+    "test": "vendor/bin/peridot --grep *Spec.hh -c peridot.hh spec",
     "check": "bin/typesafety"
   },
   "minimum-stability": "stable"
