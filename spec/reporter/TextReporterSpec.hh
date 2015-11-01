@@ -5,7 +5,7 @@ namespace hhpack\typesafety\spec\reporter;
 use hhpack\typechecker\check\Result;
 use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
-use hhpack\typesafety\ouput\ConsoleOutput;
+use hhpack\typesafety\output\ConsoleOutput;
 
 describe(TextReporter::class, function() {
   beforeEach(function() {
