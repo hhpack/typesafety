@@ -7,14 +7,13 @@ use hhpack\typesafety\ApplicationContext;
 
 describe(ApplicationContext::class, function() {
   beforeEach(function() {
-    $this->context = ApplicationContext::fromArray([
-      'script.hh',
-      'output.json'
-    ]);
+    $this->context = ApplicationContext::fromArray([ 'script.hh' ]);
   });
   describe('#getArguments', function() {
     it('return Arguments instance', function() {
-      expect($this->context->getArguments())->toBeAnInstanceOf(Arguments::class);
+      $args = $this->context->getArguments();
+      expect($args->getScriptName())->toBe('script.hh');
+      expect($args->getRootDirectory())->toBe((string) getcwd());
     });
   });
 });
