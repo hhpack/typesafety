@@ -2,6 +2,8 @@
 
 namespace hhpack\typesafety;
 
+use hhpack\typechecker\check\Result;
+
 final class ApplicationContext implements Context
 {
 

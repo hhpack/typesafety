@@ -2,6 +2,7 @@
 
 namespace hhpack\typesafety;
 
+use hhpack\typechecker\check\Result;
 
 interface Listener
 {

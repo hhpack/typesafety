@@ -2,6 +2,8 @@
 
 namespace hhpack\typesafety;
 
+use hhpack\typechecker\TypeCheckerClient;
+
 final class Application
 {
 
@@ -16,8 +18,8 @@ final class Application
     {
         $context->started();
 
-        await $this->client->restart();
-        $result = await $this->client->check();
+        await $this->client->restartServer();
+        $result = await $this->client->verifyType();
 
         $context->finish();
 

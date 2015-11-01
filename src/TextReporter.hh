@@ -2,6 +2,9 @@
 
 namespace hhpack\typesafety;
 
+use hhpack\typechecker\check\Result;
+use hhpack\typechecker\check\Error;
+use hhpack\typechecker\check\Message;
 
 final class TextReporter implements Listener
 {
