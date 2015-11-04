@@ -12,7 +12,8 @@
   "require": {
     "hhvm": ">=3.6",
     "hhpack/typechecker-client": "~0.1.0",
-    "hhpack/publisher": "~0.1.0"
+    "hhpack/publisher": "~0.1.0",
+    "hhpack/color": "~0.3.0"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
