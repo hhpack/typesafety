@@ -39,17 +39,15 @@ final class TextReporter implements Reporter
     private function displayStatus(StoppedMessage $message) : void
     {
         if ($message->isPassed()) {
-            $this->output->write('Type check passed.');
+            $this->output->info('Type check passed.');
         } else {
-            $this->output->writeln('Type check failed.');
+            $this->output->error('Type check failed.');
         }
-        $this->output->writeln('');
+        $this->output->log('');
     }
 
     private function displayErrors(StoppedMessage $message) : void
     {
-//        $errors = $result->getErrors();
-
         foreach ($message->errors() as $error) {
             $this->displayError($error);
         }
@@ -66,15 +64,15 @@ final class TextReporter implements Reporter
 
     private function displayMessage(Message $message) : void
     {
-        $this->output->writeln($message->getPath() . PHP_EOL);
+        $this->output->info('%s%s', $message->getPath(), PHP_EOL);
 
         $description = $message->getDescription();
         $texts = explode(PHP_EOL, $description);
 
         foreach ($texts as $text) {
-            $this->output->writeln('' . $text);
+            $this->output->error('  %s', $text);
         }
-        $this->output->writeln('');
+        $this->output->log('');
 
         $lineNumber = $message->getLineNumber();
         $startAt = $message->getStartColumnNumber();
@@ -89,8 +87,8 @@ final class TextReporter implements Reporter
         $length = $startAt + ($endAt - $startAt);
         $stringText = str_pad($stringText, $length, "^");
 
-        $this->output->writeln('  ' . $record);
-        $this->output->writeln('  ' . $stringText);
+        $this->output->error('  %s', $record);
+        $this->output->error('  %s', $stringText);
     }
 
 }
