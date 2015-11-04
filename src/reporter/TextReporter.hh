@@ -18,6 +18,7 @@ use hhpack\publisher\Message as TypeCheckMessage;
 use hhpack\publisher\Subscribable;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\Reporter;
+use hhpack\typesafety\Output;
 
 final class TextReporter implements Reporter
 {

@@ -11,12 +11,12 @@
 
 namespace hhpack\typesafety\output;
 
-use hhpack\typesafety\Writable;
+use hhpack\typesafety\Output;
 use hhpack\color\Color;
 use hhpack\color\StyleType;
 use hhpack\color\ForegroundColor;
 
-final class ConsoleOutput implements Writable<string>
+final class ConsoleOutput implements Output
 {
 
     public function __construct(

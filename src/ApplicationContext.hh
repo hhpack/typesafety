@@ -15,6 +15,7 @@ use hhpack\typechecker\check\Result;
 use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
+use hhpack\typesafety\Output;
 
 final class ApplicationContext implements Context
 {
