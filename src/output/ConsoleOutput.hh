@@ -35,7 +35,7 @@ final class ConsoleOutput implements Output
 
     public function info(string $format, ...) : void
     {
-        $formatter = Color::fromColor(ForegroundColor::Green);
+        $formatter = Color::fromColor(ForegroundColor::Cyan);
         $message = call_user_func_array(inst_meth($formatter, 'format'), func_get_args());
 
         $this->stdout->writeln($message);
@@ -56,6 +56,19 @@ final class ConsoleOutput implements Output
         $formatter = Color::fromColor(ForegroundColor::Yellow)
             ->addStyle(StyleType::Bold);
 
+        $message = call_user_func_array(inst_meth($formatter, 'format'), func_get_args());
+
+        $this->stdout->writeln($message);
+    }
+
+    public function fail(string $format, ...) : void
+    {
+        call_user_func_array(inst_meth($this, 'error'), func_get_args());
+    }
+
+    public function success(string $format, ...) : void
+    {
+        $formatter = Color::fromColor(ForegroundColor::Green);
         $message = call_user_func_array(inst_meth($formatter, 'format'), func_get_args());
 
         $this->stdout->writeln($message);
