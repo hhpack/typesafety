@@ -17,4 +17,6 @@ interface Output extends Writable<string>
     public function info(string $format, ...) : void;
     public function error(string $format, ...) : void;
     public function warn(string $format, ...) : void;
+    public function fail(string $format, ...) : void;
+    public function success(string $format, ...) : void;
 }

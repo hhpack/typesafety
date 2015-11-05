@@ -39,9 +39,9 @@ final class TextReporter implements Reporter
     private function displayStatus(StoppedMessage $message) : void
     {
         if ($message->isPassed()) {
-            $this->output->info('Type check passed.');
+            $this->output->success('Type check passed.');
         } else {
-            $this->output->error('Type check failed.');
+            $this->output->fail('Type check failed.');
         }
         $this->output->log('');
     }
