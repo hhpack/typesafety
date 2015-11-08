@@ -43,7 +43,6 @@ final class TextReporter implements Reporter
         } else {
             $this->output->fail('Type check failed.');
         }
-        $this->output->log('');
     }
 
     private function displayErrors(StoppedMessage $message) : void
