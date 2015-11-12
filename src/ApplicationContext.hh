@@ -28,9 +28,9 @@ final class ApplicationContext implements Context
     {
     }
 
-    public function getArguments() : Arguments
+    public function rootDirectory() : Path
     {
-        return $this->args;
+        return $this->args->getRootDirectory();
     }
 
     public function started() : void

@@ -9,11 +9,10 @@ describe(ApplicationContext::class, function() {
   beforeEach(function() {
     $this->context = ApplicationContext::fromArray([ 'script.hh' ]);
   });
-  describe('#getArguments', function() {
-    it('return Arguments instance', function() {
-      $args = $this->context->getArguments();
-      expect($args->getScriptName())->toBe('script.hh');
-      expect($args->getRootDirectory())->toBe((string) getcwd());
+  describe('#rootDirectory', function() {
+    it('return root directory instance', function() {
+      $path = $this->context->rootDirectory();
+      expect($path)->toBe((string) getcwd());
     });
   });
 });

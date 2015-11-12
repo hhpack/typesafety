@@ -15,7 +15,7 @@ use hhpack\typechecker\check\Result;
 
 interface Context
 {
-    public function getArguments() : Arguments;
+    public function rootDirectory() : Path;
     public function started() : void;
     public function report(Result $result) : void;
     public function finish() : void;
