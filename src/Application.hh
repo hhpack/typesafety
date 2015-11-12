@@ -22,8 +22,8 @@ final class Application
 
         $client = new TypeCheckerClient();
 
-        await $client->restartServer();
-        $result = await $client->verifyType();
+        await $client->restart();
+        $result = await $client->check();
 
         $context->finish();
 
