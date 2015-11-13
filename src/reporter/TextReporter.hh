@@ -73,21 +73,18 @@ final class TextReporter implements Reporter
         }
         $this->output->log('');
 
-        $lineNumber = $message->getLineNumber();
         $startAt = $message->getStartColumnNumber();
         $endAt = $message->getEndColumnNumber();
-
-        $content = file_get_contents($message->getPath());
-        $lines = explode(PHP_EOL, $content);
-
-        $record = $lines[$lineNumber - 1];
+        $lineNumber = $message->getLineNumber();
 
         $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
         $length = $startAt + ($endAt - $startAt);
         $stringText = str_pad($stringText, $length, "^");
 
-        $this->output->error('  %s', $record);
-        $this->output->error('  %s', $stringText);
+        $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
+
+        $this->output->error('  %d: %s', $lineNumber, $message->getLineCode());
+        $this->output->error('  %s %s', $paddingSpace, $stringText);
     }
 
 }
