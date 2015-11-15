@@ -11,7 +11,7 @@
   "license": "MIT",
   "require": {
     "hhvm": ">=3.6",
-    "hhpack/typechecker-client": "~0.2",
+    "hhpack/typechecker-client": "~0.3",
     "hhpack/publisher": "~0.1.0",
     "hhpack/color": "~0.3.0"
   },
