@@ -18,78 +18,94 @@ use hhpack\publisher\Message as TypeCheckMessage;
 use hhpack\publisher\Subscribable;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\Reporter;
+use hhpack\typesafety\Output;
 
 final class TextReporter implements Reporter
 {
+
+    private (function(string, ...):void) $errorPrinter;
 
     public function __construct
     (
         private Output $output
     )
     {
+        $this->errorPrinter = inst_meth($this->output, 'error');
     }
 
     public function onStop(StoppedMessage $message) : void
     {
-        $this->displayStatus($message);
         $this->displayErrors($message);
+        $this->displayStatus($message);
     }
 
     private function displayStatus(StoppedMessage $message) : void
     {
         if ($message->isPassed()) {
-            $this->output->write('Type check passed.');
+            $this->output->success('Type check passed.');
         } else {
-            $this->output->writeln('Type check failed.');
+            $this->output->fail("Type checker found %d errors.", $message->errorCount());
         }
-        $this->output->writeln('');
     }
 
     private function displayErrors(StoppedMessage $message) : void
     {
-//        $errors = $result->getErrors();
-
-        foreach ($message->errors() as $error) {
-            $this->displayError($error);
+        foreach ($message->errors() as $errorNumber => $error) {
+            $this->displayError($errorNumber, $error);
         }
     }
 
-    private function displayError(Error $error) : void
+    private function displayError(int $errorNumber, Error $error) : void
     {
-        $messages = $error->getMessages();
-
-        foreach ($messages as $message) {
+        foreach ($error->getMessages() as $number => $message) {
+            if ($number === 0) {
+                $this->errorPrinter = inst_meth($this->output, 'error');
+                $this->display('Error: %d - %s%s', $errorNumber, $message->getPath(), PHP_EOL);
+            } else {
+                $this->errorPrinter = inst_meth($this->output, 'info');
+            }
             $this->displayMessage($message);
         }
     }
 
     private function displayMessage(Message $message) : void
     {
-        $this->output->writeln($message->getPath() . PHP_EOL);
+        $this->displayDescription($message);
+        $this->displayErrorMessage($message);
+    }
 
+    private function displayDescription(Message $message) : void
+    {
         $description = $message->getDescription();
         $texts = explode(PHP_EOL, $description);
 
         foreach ($texts as $text) {
-            $this->output->writeln('' . $text);
+            $this->display('  %s', $text);
         }
-        $this->output->writeln('');
+        $this->output->write("\n");
+    }
 
-        $lineNumber = $message->getLineNumber();
+    private function displayErrorMessage(Message $message) : void
+    {
         $startAt = $message->getStartColumnNumber();
         $endAt = $message->getEndColumnNumber();
-
-        $content = file_get_contents($message->getPath());
-        $lines = explode(PHP_EOL, $content);
-
-        $record = $lines[$lineNumber - 1];
+        $lineNumber = $message->getLineNumber();
 
         $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
         $length = $startAt + ($endAt - $startAt);
         $stringText = str_pad($stringText, $length, "^");
 
-        $this->output->writeln('  ' . $record);
-        $this->output->writeln('  ' . $stringText);
+        $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
+
+        $this->display('    %d: %s', $lineNumber, $message->getLineCode());
+        $this->display('    %s %s%s', $paddingSpace, $stringText, PHP_EOL);
+    }
+
+    private function display(string $format, ...) : void
+    {
+        $args = Vector { $format };
+        $args->addAll(func_get_args());
+        call_user_func_array($this->errorPrinter, $args->toValuesArray());
     }
 
 }

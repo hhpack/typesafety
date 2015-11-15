@@ -35,11 +35,16 @@ final class StoppedMessage implements Message
         return $this->result->isPassed() === false;
     }
 
-    public function errors() : Generator<int, Error, void>
+    public function errors() : KeyedIterator<int, Error>
     {
-        foreach ($this->result->getErrors() as $error) {
-            yield $error;
+        foreach ($this->result->getErrors() as $number => $error) {
+            yield $number + 1 => $error;
         }
+    }
+
+    public function errorCount() : int
+    {
+        return $this->result->getErrorCount();
     }
 
 }

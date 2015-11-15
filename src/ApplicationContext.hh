@@ -15,6 +15,7 @@ use hhpack\typechecker\check\Result;
 use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
+use hhpack\typesafety\Output;
 
 final class ApplicationContext implements Context
 {
@@ -27,14 +28,14 @@ final class ApplicationContext implements Context
     {
     }
 
-    public function getArguments() : Arguments
+    public function rootDirectory() : Path
     {
-        return $this->args;
+        return $this->args->getRootDirectory();
     }
 
     public function started() : void
     {
-        $this->output->writeln('Type check started.');
+        $this->output->info('Type check started.');
     }
 
     public function report(Result $result) : void
@@ -45,7 +46,7 @@ final class ApplicationContext implements Context
 
     public function finish() : void
     {
-        $this->output->writeln('Type check finished.');
+        $this->output->info('Type check finished.');
     }
 
     public function terminated(Result $result) : void

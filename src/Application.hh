@@ -20,10 +20,10 @@ final class Application
     {
         $context->started();
 
-        $client = new TypeCheckerClient();
+        $client = new TypeCheckerClient( $context->rootDirectory() );
 
-        await $client->restartServer();
-        $result = await $client->verifyType();
+        await $client->restart();
+        $result = await $client->check();
 
         $context->finish();
 

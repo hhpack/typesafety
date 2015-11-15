@@ -14,12 +14,9 @@ namespace hhpack\typesafety
     type Path = string;
     type ScriptName = string;
     type Argv = Traversable<string>;
-    type Output = Writable<string>;
 }
 
 namespace hhpack\typesafety\reporter
 {
-    use hhpack\typesafety\Writable;
-
-    type Output = Writable<string>;
+    type Path = string;
 }
