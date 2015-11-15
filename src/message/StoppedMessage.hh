@@ -42,4 +42,9 @@ final class StoppedMessage implements Message
         }
     }
 
+    public function errorCount() : int
+    {
+        return $this->result->getErrorCount();
+    }
+
 }

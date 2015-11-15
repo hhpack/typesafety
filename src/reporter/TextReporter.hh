@@ -23,13 +23,14 @@ use hhpack\typesafety\Output;
 final class TextReporter implements Reporter
 {
 
-    private Set<Path> $files = Set {};
+    private (function(string, ...):void) $errorPrinter;
 
     public function __construct
     (
         private Output $output
     )
     {
+        $this->errorPrinter = inst_meth($this->output, 'error');
     }
 
     public function onStop(StoppedMessage $message) : void
@@ -43,41 +44,34 @@ final class TextReporter implements Reporter
         if ($message->isPassed()) {
             $this->output->success('Type check passed.');
         } else {
-            $this->output->fail('Type check failed.');
+            $this->output->fail("Type checker found %d errors.", $message->errorCount());
         }
     }
 
     private function displayErrors(StoppedMessage $message) : void
     {
-        foreach ($message->errors() as $error) {
-            $this->displayError($error);
+        foreach ($message->errors() as $errorNumber => $error) {
+            $this->displayError($errorNumber, $error);
         }
     }
 
-    private function displayError(Error $error) : void
+    private function displayError(int $errorNumber, Error $error) : void
     {
-        $messages = $error->getMessages();
-
-        foreach ($messages as $message) {
+        foreach ($error->getMessages() as $number => $message) {
+            if ($number === 0) {
+                $this->errorPrinter = inst_meth($this->output, 'error');
+                $this->display('Error: %d - %s%s', $errorNumber, $message->getPath(), PHP_EOL);
+            } else {
+                $this->errorPrinter = inst_meth($this->output, 'info');
+            }
             $this->displayMessage($message);
         }
     }
 
     private function displayMessage(Message $message) : void
     {
-        $this->displayHeader($message);
         $this->displayDescription($message);
         $this->displayErrorMessage($message);
-    }
-
-    private function displayHeader(Message $message) : void
-    {
-        $file = $message->getPath();
-
-        if ($this->files->contains($file) === false) {
-            $this->files->add($file);
-            $this->output->info('%s%s', $file, PHP_EOL);
-        };
     }
 
     private function displayDescription(Message $message) : void
@@ -86,9 +80,9 @@ final class TextReporter implements Reporter
         $texts = explode(PHP_EOL, $description);
 
         foreach ($texts as $text) {
-            $this->output->error('  %s', $text);
+            $this->display('  %s', $text);
         }
-        $this->output->log('');
+        $this->output->write("\n");
     }
 
     private function displayErrorMessage(Message $message) : void
@@ -103,8 +97,15 @@ final class TextReporter implements Reporter
 
         $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
 
-        $this->output->error('    %d: %s', $lineNumber, $message->getLineCode());
-        $this->output->error('    %s %s', $paddingSpace, $stringText);
+        $this->display('    %d: %s', $lineNumber, $message->getLineCode());
+        $this->display('    %s %s%s', $paddingSpace, $stringText, PHP_EOL);
+    }
+
+    private function display(string $format, ...) : void
+    {
+        $args = Vector { $format };
+        $args->addAll(func_get_args());
+        call_user_func_array($this->errorPrinter, $args->toValuesArray());
     }
 
 }
