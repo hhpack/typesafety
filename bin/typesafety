@@ -4,8 +4,10 @@
 namespace hhpack\typesafety;
 
 $autoloadFiles = [
+    __DIR__ . '/../../../autoload.php',
     __DIR__ . '/../vendor/autoload.php',
-    realpath(__DIR__ . '/../../../../')
+    __DIR__ . '/vendor/autoload.php',
+    __DIR__ . '/../autoload.php'
 ];
 
 $composerInstall = false;
