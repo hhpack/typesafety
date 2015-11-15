@@ -103,8 +103,8 @@ final class TextReporter implements Reporter
 
         $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
 
-        $this->output->error('  %d: %s', $lineNumber, $message->getLineCode());
-        $this->output->error('  %s %s', $paddingSpace, $stringText);
+        $this->output->error('    %d: %s', $lineNumber, $message->getLineCode());
+        $this->output->error('    %s %s', $paddingSpace, $stringText);
     }
 
 }
