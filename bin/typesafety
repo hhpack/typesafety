@@ -1,6 +1,8 @@
 #!/usr/bin/env hhvm
 <?hh //partial
 
+namespace hhpack\typesafety;
+
 $autoloadFiles = [
     __DIR__ . '/../vendor/autoload.php',
     realpath(__DIR__ . '/../../../../')
@@ -28,5 +30,10 @@ unset($composerInstall, $autoloadFiles, $autoloadFile);
 use hhpack\typesafety\Application;
 use hhpack\typesafety\ApplicationContext;
 
-$application = new Application();
-$application->run( ApplicationContext::fromArray($argv) );
+async function main(array<string> $argv) : Awaitable<void>
+{
+    $application = new Application();
+    await $application->run( ApplicationContext::fromArray($argv) );
+}
+
+main($argv);
