@@ -34,8 +34,8 @@ final class TextReporter implements Reporter
 
     public function onStop(StoppedMessage $message) : void
     {
-        $this->displayStatus($message);
         $this->displayErrors($message);
+        $this->displayStatus($message);
     }
 
     private function displayStatus(StoppedMessage $message) : void
