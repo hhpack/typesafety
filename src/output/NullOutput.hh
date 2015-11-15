@@ -19,7 +19,7 @@ use hhpack\color\ForegroundColor;
 final class NullOutput implements Output
 {
 
-    public function log(string $format, ...) : void
+    public function debug(string $format, ...) : void
     {
     }
 

@@ -13,7 +13,7 @@ namespace hhpack\typesafety;
 
 interface Output extends Writable<string>
 {
-    public function log(string $format, ...) : void;
+    public function debug(string $format, ...) : void;
     public function info(string $format, ...) : void;
     public function error(string $format, ...) : void;
     public function warn(string $format, ...) : void;

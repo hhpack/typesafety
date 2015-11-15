@@ -25,7 +25,7 @@ final class ConsoleOutput implements Output
     {
     }
 
-    public function log(string $format, ...) : void
+    public function debug(string $format, ...) : void
     {
         $formatter = Color::fromDefault();
         $message = call_user_func_array(inst_meth($formatter, 'format'), func_get_args());
