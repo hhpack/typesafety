@@ -6,6 +6,8 @@ typesafety
 [![Dependency Status](https://www.versioneye.com/user/projects/562cbfeb36d0ab001900118e/badge.svg?style=flat)](https://www.versioneye.com/user/projects/562cbfeb36d0ab001900118e)
 [![License](https://poser.pugx.org/hhpack/typesafety/license)](https://packagist.org/packages/hhpack/typesafety)
 
+![ScreenShot](https://raw.githubusercontent.com/hhpack/typesafety/master/screen-shot.png)
+
 Basic usage
 ----------------------------------------
 
