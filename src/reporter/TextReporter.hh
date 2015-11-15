@@ -23,6 +23,8 @@ use hhpack\typesafety\Output;
 final class TextReporter implements Reporter
 {
 
+    private Set<Path> $files = Set {};
+
     public function __construct
     (
         private Output $output
@@ -63,15 +65,8 @@ final class TextReporter implements Reporter
 
     private function displayMessage(Message $message) : void
     {
-        $this->output->info('%s%s', $message->getPath(), PHP_EOL);
-
-        $description = $message->getDescription();
-        $texts = explode(PHP_EOL, $description);
-
-        foreach ($texts as $text) {
-            $this->output->error('  %s', $text);
-        }
-        $this->output->log('');
+        $this->displayHeader($message);
+        $this->displayDescription($message);
 
         $startAt = $message->getStartColumnNumber();
         $endAt = $message->getEndColumnNumber();
@@ -85,6 +80,27 @@ final class TextReporter implements Reporter
 
         $this->output->error('  %d: %s', $lineNumber, $message->getLineCode());
         $this->output->error('  %s %s', $paddingSpace, $stringText);
+    }
+
+    private function displayHeader(Message $message) : void
+    {
+        $file = $message->getPath();
+
+        if ($this->files->contains($file) === false) {
+            $this->files->add($file);
+            $this->output->info('%s%s', $file, PHP_EOL);
+        };
+    }
+
+    private function displayDescription(Message $message) : void
+    {
+        $description = $message->getDescription();
+        $texts = explode(PHP_EOL, $description);
+
+        foreach ($texts as $text) {
+            $this->output->error('  %s', $text);
+        }
+        $this->output->log('');
     }
 
 }

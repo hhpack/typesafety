@@ -15,3 +15,8 @@ namespace hhpack\typesafety
     type ScriptName = string;
     type Argv = Traversable<string>;
 }
+
+namespace hhpack\typesafety\reporter
+{
+    type Path = string;
+}
