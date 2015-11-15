@@ -25,14 +25,14 @@ final class StoppedMessage implements Message
     {
     }
 
-    public function isPassed() : bool
+    public function isOk() : bool
     {
-        return $this->result->isPassed();
+        return $this->result->isOk();
     }
 
-    public function isFailed() : bool
+    public function isError() : bool
     {
-        return $this->result->isPassed() === false;
+        return $this->result->isError();
     }
 
     public function errors() : KeyedIterator<int, Error>

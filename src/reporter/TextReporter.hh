@@ -41,7 +41,7 @@ final class TextReporter implements Reporter
 
     private function displayStatus(StoppedMessage $message) : void
     {
-        if ($message->isPassed()) {
+        if ($message->isOk()) {
             $this->output->success('Type check passed.');
         } else {
             $this->output->fail("Type checker found %d errors.", $message->errorCount());

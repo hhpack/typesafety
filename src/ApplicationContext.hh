@@ -40,6 +40,9 @@ final class ApplicationContext implements Context
 
     public function report(Result $result) : void
     {
+        if ($result->isError()) {
+            $this->output->write(PHP_EOL);
+        }
         $reporter = new TextReporter($this->output);
         $reporter->onStop(new StoppedMessage($result));
     }
@@ -51,7 +54,7 @@ final class ApplicationContext implements Context
 
     public function terminated(Result $result) : void
     {
-        $exitCode = $result->isPassed() ? 0 : -1;
+        $exitCode = $result->isOk() ? 0 : -1;
         exit($exitCode);
     }
 
