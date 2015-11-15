@@ -20,6 +20,7 @@
     "peridot-php/peridot": "~1.16",
     "peridot-php/peridot-dot-reporter": "~1.0"
   },
+  "bin": [ "bin/typesafety" ],
   "autoload": {
     "psr-4": {
       "hhpack\\typesafety\\": "src/"
