@@ -67,19 +67,7 @@ final class TextReporter implements Reporter
     {
         $this->displayHeader($message);
         $this->displayDescription($message);
-
-        $startAt = $message->getStartColumnNumber();
-        $endAt = $message->getEndColumnNumber();
-        $lineNumber = $message->getLineNumber();
-
-        $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
-        $length = $startAt + ($endAt - $startAt);
-        $stringText = str_pad($stringText, $length, "^");
-
-        $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
-
-        $this->output->error('  %d: %s', $lineNumber, $message->getLineCode());
-        $this->output->error('  %s %s', $paddingSpace, $stringText);
+        $this->displayErrorMessage($message);
     }
 
     private function displayHeader(Message $message) : void
@@ -101,6 +89,22 @@ final class TextReporter implements Reporter
             $this->output->error('  %s', $text);
         }
         $this->output->log('');
+    }
+
+    private function displayErrorMessage(Message $message) : void
+    {
+        $startAt = $message->getStartColumnNumber();
+        $endAt = $message->getEndColumnNumber();
+        $lineNumber = $message->getLineNumber();
+
+        $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
+        $length = $startAt + ($endAt - $startAt);
+        $stringText = str_pad($stringText, $length, "^");
+
+        $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
+
+        $this->output->error('  %d: %s', $lineNumber, $message->getLineCode());
+        $this->output->error('  %s %s', $paddingSpace, $stringText);
     }
 
 }
