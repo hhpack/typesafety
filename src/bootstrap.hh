@@ -20,3 +20,12 @@ namespace hhpack\typesafety\reporter
 {
     type Path = string;
 }
+
+namespace hhpack\typesafety
+{
+    async function main(array<string> $argv) : Awaitable<void>
+    {
+        $application = new Application();
+        await $application->run( ApplicationContext::fromArray($argv) );
+    }
+}

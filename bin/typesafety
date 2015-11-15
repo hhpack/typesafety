@@ -27,13 +27,4 @@ if (!$composerInstall) {
 
 unset($composerInstall, $autoloadFiles, $autoloadFile);
 
-use hhpack\typesafety\Application;
-use hhpack\typesafety\ApplicationContext;
-
-async function main(array<string> $argv) : Awaitable<void>
-{
-    $application = new Application();
-    await $application->run( ApplicationContext::fromArray($argv) );
-}
-
 main($argv);
