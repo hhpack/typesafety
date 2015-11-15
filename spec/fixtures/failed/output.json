@@ -1,66 +1,54 @@
 {
-  "passed": false,
-  "errors": [
-    {
-      "message": [
+    "passed": false,
+    "errors": [
         {
-          "descr": "Expected variable",
-          "path": "{$rootDirectory}/Example1.txt",
-          "line": 6,
-          "start": 35,
-          "end": 35,
-          "code": 1002
-        }
-      ]
-    },
-    {
-      "message": [
+            "message": [
+                {
+                    "descr": "This method is not declared as abstract, it must have a body",
+                    "path": "{$rootDirectory}/Example1.txt",
+                    "line": 6,
+                    "start": 21,
+                    "end": 31,
+                    "code": 3014
+                }
+            ]
+        },
         {
-          "descr": "Unbound name: T",
-          "path": "{$rootDirectory}/Example1.txt",
-          "line": 6,
-          "start": 33,
-          "end": 33,
-          "code": 2049
-        }
-      ]
-    },
-    {
-      "message": [
+            "message": [
+                {
+                    "descr": "Unbound name: T (an object type)",
+                    "path": "{$rootDirectory}/Example1.txt",
+                    "line": 6,
+                    "start": 33,
+                    "end": 33,
+                    "code": 2049
+                }
+            ]
+        },
         {
-          "descr": "Unbound name: T",
-          "path": "{$rootDirectory}/Example1.txt",
-          "line": 6,
-          "start": 33,
-          "end": 33,
-          "code": 2049
-        }
-      ]
-    },
-    {
-      "message": [
+            "message": [
+                {
+                    "descr": "You probably forgot to bind this type parameter right?\nAdd <T> somewhere (after the function name definition, or after the class name)\nExamples: function foo<T> or class A<T>",
+                    "path": "{$rootDirectory}/Example1.txt",
+                    "line": 6,
+                    "start": 33,
+                    "end": 33,
+                    "code": 2002
+                }
+            ]
+        },
         {
-          "descr": "You probably forgot to bind this type parameter right?\nAdd <T> somewhere (after the function name definition, or after the class name)\nExamples: function foo<T> or class A<T>",
-          "path": "{$rootDirectory}/Example1.txt",
-          "line": 6,
-          "start": 33,
-          "end": 33,
-          "code": 2002
+            "message": [
+                {
+                    "descr": "Expected variable",
+                    "path": "{$rootDirectory}/Example1.txt",
+                    "line": 6,
+                    "start": 35,
+                    "end": 35,
+                    "code": 1002
+                }
+            ]
         }
-      ]
-    },
-    {
-      "message": [
-        {
-          "descr": "This method is not declared as abstract, it must have a body",
-          "path": "{$rootDirectory}/Example1.txt",
-          "line": 6,
-          "start": 21,
-          "end": 31,
-          "code": 3014
-        }
-      ]
-    }
-  ],
-  "version": "817b3a0 Nov 15 2014 13:25:51"
+    ],
+    "version": "0f72cfc2f0a01fdfeb72fbcfeb247b72998a66db Aug 28 2015 15:32:32"
 }
