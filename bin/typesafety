@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# ------------------------------------
+# Usage: typesafety [WWW-ROOT]
+# ------------------------------------
+
 touch .hhconfig
 hh_client restart 2> /dev/null
 
