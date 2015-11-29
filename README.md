@@ -15,6 +15,24 @@ You only need to specify the directory where you want to check the type.
 
 	vendor/bin/typesafety [RootDirectory]
 
+composer.json
+----------------------------------------
+
+By adding a set to composer.json, it will be able to easily run.
+
+```json
+{
+    "scripts": {
+        "check": "vendor/bin/typesafety"
+    }
+}
+```
+
+You can run the typecheck with the following command.
+
+	composer check
+
+
 Run the test
 ------------------------------------------------
 
