@@ -9,4 +9,16 @@ hh_client restart 2> /dev/null
 
 SCRIPT_DIR=$(cd $(dirname $0) && pwd)
 
-hhvm $SCRIPT_DIR/typesafety.hh $1
+# Script path for package
+VENDOR_SCRIPT=$SCRIPT_DIR/typesafety.hh
+
+# Script path for composer
+INSTALLED_SCRIPT=$SCRIPT_DIR/../hhpack/typesafety/bin/typesafety.hh
+
+if [ -e $VENDOR_SCRIPT ]; then
+  hhvm $VENDOR_SCRIPT $1
+fi
+
+if [ -e $INSTALLED_SCRIPT ]; then
+  hhvm $INSTALLED_SCRIPT $1
+fi
