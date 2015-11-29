@@ -22,8 +22,8 @@ final class Application
 
         $client = new TypeCheckerClient( $context->rootDirectory() );
 
-        await $client->init();
-        await $client->restart();
+//        await $client->init();
+//        await $client->restart();
         $result = await $client->check();
 
         $context->finish();
