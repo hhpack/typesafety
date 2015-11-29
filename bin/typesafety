@@ -1,32 +1,24 @@
-#!/usr/bin/env hhvm
-<?hh //partial
+#!/usr/bin/env bash
 
-namespace hhpack\typesafety;
+# ------------------------------------
+# Usage: typesafety [WWW-ROOT]
+# ------------------------------------
 
-$autoloadFiles = [
-    __DIR__ . '/../../../autoload.php',
-    __DIR__ . '/../vendor/autoload.php',
-    __DIR__ . '/vendor/autoload.php',
-    __DIR__ . '/../autoload.php'
-];
+touch .hhconfig
+hh_client restart 2> /dev/null
 
-$composerInstall = false;
-foreach ($autoloadFiles as $autoloadFile) {
-    if (file_exists($autoloadFile) === false) {
-        continue;
-    }
-    require $autoloadFile;
-    $composerInstall = true;
-    break;
-}
+SCRIPT_DIR=$(cd $(dirname $0) && pwd)
 
-if (!$composerInstall) {
-    echo 'You must set up the dependencies, run the following commands:'. PHP_EOL .
-        'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
-        'php composer.phar install' . PHP_EOL;
-    exit(1);
-}
+# Script path for package
+VENDOR_SCRIPT=$SCRIPT_DIR/typesafety.hh
 
-unset($composerInstall, $autoloadFiles, $autoloadFile);
+# Script path for composer
+INSTALLED_SCRIPT=$SCRIPT_DIR/../hhpack/typesafety/bin/typesafety.hh
 
-main($argv);
+if [ -e $VENDOR_SCRIPT ]; then
+  hhvm $VENDOR_SCRIPT $1
+fi
+
+if [ -e $INSTALLED_SCRIPT ]; then
+  hhvm $INSTALLED_SCRIPT $1
+fi
