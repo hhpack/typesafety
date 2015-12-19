@@ -33,7 +33,7 @@ final class TextReporter implements Reporter
         $this->errorPrinter = inst_meth($this->output, 'error');
     }
 
-    public function onStop(StoppedMessage $message) : void
+    public async function onStop(StoppedMessage $message) : Awaitable<void>
     {
         $this->displayErrors($message);
         $this->displayStatus($message);
