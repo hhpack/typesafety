@@ -17,7 +17,7 @@ interface Context
 {
     public function rootDirectory() : Path;
     public function started() : void;
-    public function report(Result $result) : void;
+    public function report(Result $result) : Awaitable<void>;
     public function finish() : void;
     public function terminated(Result $result) : void;
     public static function fromArray(array<string> $argv) : this;

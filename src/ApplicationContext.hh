@@ -38,13 +38,13 @@ final class ApplicationContext implements Context
         $this->output->info('Type check started.');
     }
 
-    public function report(Result $result) : void
+    public async function report(Result $result) : Awaitable<void>
     {
         if ($result->isError()) {
             $this->output->write(PHP_EOL);
         }
         $reporter = new TextReporter($this->output);
-        $reporter->onStop(new StoppedMessage($result));
+        await $reporter->onStop(new StoppedMessage($result));
     }
 
     public function finish() : void

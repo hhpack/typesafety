@@ -27,7 +27,7 @@ final class Application
 
         $context->finish();
 
-        $context->report($result);
+        await $context->report($result);
         $context->terminated($result);
     }
 

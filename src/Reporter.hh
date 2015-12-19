@@ -18,5 +18,5 @@ use hhpack\publisher\Subscribable;
 
 interface Reporter extends Subscribable<TypeCheckMessage>
 {
-    public function onStop(StoppedMessage $message) : void;
+    public function onStop(StoppedMessage $message) : Awaitable<void>;
 }

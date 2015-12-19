@@ -15,8 +15,8 @@ describe(TextReporter::class, function() {
     $this->reporter = new TextReporter(new ConsoleOutput());
   });
   describe('onStop()', function() {
-    it('display type check report', function () {
-      $this->reporter->onStop(new StoppedMessage($this->result));
+    it('display type check report', async function () {
+      await $this->reporter->onStop(new StoppedMessage($this->result));
     });
   });
 });
