@@ -57,10 +57,10 @@ final class TextReporter implements Reporter
 
     private function displayError(int $errorNumber, Error $error) : void
     {
-        foreach ($error->getMessages() as $number => $message) {
+        foreach ($error->messages()->lazy() as $number => $message) {
             if ($number === 0) {
                 $this->errorPrinter = inst_meth($this->output, 'error');
-                $this->display('Error: %d - %s%s', $errorNumber, $message->getPath(), PHP_EOL);
+                $this->display('Error: %d - %s%s', $errorNumber, $message->path(), PHP_EOL);
             } else {
                 $this->errorPrinter = inst_meth($this->output, 'info');
             }
@@ -76,7 +76,7 @@ final class TextReporter implements Reporter
 
     private function displayDescription(Message $message) : void
     {
-        $description = $message->getDescription();
+        $description = $message->description();
         $texts = explode(PHP_EOL, $description);
 
         foreach ($texts as $text) {
@@ -87,9 +87,9 @@ final class TextReporter implements Reporter
 
     private function displayErrorMessage(Message $message) : void
     {
-        $startAt = $message->getStartColumnNumber();
-        $endAt = $message->getEndColumnNumber();
-        $lineNumber = $message->getLineNumber();
+        $startAt = $message->startColumnNumber();
+        $endAt = $message->endColumnNumber();
+        $lineNumber = $message->lineNumber();
 
         $stringText = str_pad("^", $startAt, " ", STR_PAD_LEFT);
         $length = $startAt + ($endAt - $startAt);
@@ -97,7 +97,7 @@ final class TextReporter implements Reporter
 
         $paddingSpace = str_repeat(' ', strlen((string) $lineNumber) + 1);
 
-        $this->display('    %d: %s', $lineNumber, $message->getLineCode());
+        $this->display('    %d: %s', $lineNumber, $message->lineCode());
         $this->display('    %s %s%s', $paddingSpace, $stringText, PHP_EOL);
     }
 

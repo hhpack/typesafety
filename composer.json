@@ -10,8 +10,8 @@
   ],
   "license": "MIT",
   "require": {
-    "hhvm": ">=3.6",
-    "hhpack/typechecker-client": "~0.4",
+    "hhvm": ">=3.11.0",
+    "hhpack/typechecker-client": "~0.6",
     "hhpack/publisher": "~0.2",
     "hhpack/color": "~0.3"
   },
