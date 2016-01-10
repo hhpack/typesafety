@@ -37,14 +37,14 @@ final class StoppedMessage implements Message
 
     public function errors() : KeyedIterator<int, Error>
     {
-        foreach ($this->result->getErrors() as $number => $error) {
+        foreach ($this->result->errors()->lazy() as $number => $error) {
             yield $number + 1 => $error;
         }
     }
 
     public function errorCount() : int
     {
-        return $this->result->getErrorCount();
+        return $this->result->errorCount();
     }
 
 }
