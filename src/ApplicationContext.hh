@@ -16,35 +16,17 @@ use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
-use hhpack\getopt as cli;
-use hhpack\getopt\app\ApplicationSpec;
 
 final class ApplicationContext implements Context
 {
 
-    const NAME = 'typesafety';
-    const VERSION = '0.5.0';
-
-    private ApplicationSpec $spec;
-    private Arguments $args;
-    private ArgumentOptions $options;
-
     public function __construct
     (
-        Argv $args,
+        private Arguments $args,
+        private ArgumentOptions $options,
         private Output $output = new ConsoleOutput()
     )
     {
-        $this->spec = cli\app(static::NAME)
-            ->version(static::VERSION)
-            ->options([
-                cli\bool_option('help', '-h|--help', false, 'display help message'),
-                cli\bool_option('version', '-v|--version', false, 'display version')
-            ]);
-
-        $result = $this->spec->parse($args);
-        $this->args = Arguments::fromItems($result->arguments());
-        $this->options = ArgumentOptions::fromItems($result->options());
     }
 
     public function rootDirectory() : Path
@@ -60,16 +42,6 @@ final class ApplicationContext implements Context
     public function isVersion() : bool
     {
         return (bool) $this->options->at('version');
-    }
-
-    public function displayHelp() : void
-    {
-        $this->spec->displayHelp();
-    }
-
-    public function displayVersion() : void
-    {
-        $this->spec->displayVersion();
     }
 
     public function started() : void
@@ -95,11 +67,6 @@ final class ApplicationContext implements Context
     {
         $exitCode = $result->isOk() ? 0 : -1;
         exit($exitCode);
-    }
-
-    public static function fromItems(Argv $argv) : this
-    {
-        return new static($argv);
     }
 
 }

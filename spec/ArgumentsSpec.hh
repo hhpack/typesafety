@@ -5,18 +5,10 @@ namespace hhpack\typesafety\spec;
 use hhpack\typesafety\Arguments;
 
 describe(Arguments::class, function() {
-  describe('#getScriptName', function() {
-    beforeEach(function() {
-      $this->args = Arguments::fromItems([ 'script.hh' ]);
-    });
-    it('returns script name', function() {
-      expect($this->args->getScriptName())->toBe('script.hh');
-    });
-  });
   describe('#getRootDirectory', function() {
     context('when not specify a root directory', function () {
       beforeEach(function() {
-        $this->args = Arguments::fromItems([ 'script.hh' ]);
+        $this->args = Arguments::fromItems([]);
       });
       it('returns root directory path', function() {
         expect($this->args->getRootDirectory())->toBe((string) getcwd());
@@ -24,7 +16,7 @@ describe(Arguments::class, function() {
     });
     context('when specify a root directory', function () {
       beforeEach(function() {
-        $this->args = Arguments::fromItems([ 'script.hh', __DIR__ ]);
+        $this->args = Arguments::fromItems([ __DIR__ ]);
       });
       it('returns root directory path', function() {
         expect($this->args->getRootDirectory())->toBe(__DIR__);

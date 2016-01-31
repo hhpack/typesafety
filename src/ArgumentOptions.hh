@@ -17,7 +17,7 @@ final class ArgumentOptions
     private ImmMap<string, mixed> $options;
 
     public function __construct(
-        KeyedTraversable<string, mixed> $options
+        KeyedTraversable<string, mixed> $options = []
     )
     {
         $this->options = new ImmMap($options);

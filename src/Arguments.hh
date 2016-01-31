@@ -15,23 +15,16 @@ namespace hhpack\typesafety;
 final class Arguments
 {
 
-    private ImmVector<string> $argv;
+    private ImmVector<string> $args;
 
-    public function __construct(
-        Argv $argv
-    )
+    public function __construct(Traversable<string> $args = [])
     {
-        $this->argv = new ImmVector($argv);
-    }
-
-    public function getScriptName() : ScriptName
-    {
-        return $this->argv->at(0);
+        $this->args = new ImmVector($args);
     }
 
     public function getRootDirectory() : Path
     {
-        $directory = $this->argv->get(1);
+        $directory = $this->args->get(0);
 
         if ($directory === null) {
             $directory = (string) getcwd();
@@ -40,9 +33,9 @@ final class Arguments
         return $directory;
     }
 
-    public static function fromItems(Argv $argv) : this
+    public static function fromItems(Traversable<string> $args) : this
     {
-        return new static($argv);
+        return new static($args);
     }
 
 }
