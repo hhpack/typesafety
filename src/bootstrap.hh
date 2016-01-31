@@ -12,8 +12,6 @@
 namespace hhpack\typesafety
 {
     type Path = string;
-    type ScriptName = string;
-    type Argv = Traversable<string>;
 }
 
 namespace hhpack\typesafety\reporter
@@ -23,9 +21,9 @@ namespace hhpack\typesafety\reporter
 
 namespace hhpack\typesafety
 {
-    async function main(array<string> $argv) : Awaitable<void>
+    async function main(Traversable<string> $argv) : Awaitable<void>
     {
         $application = new Application();
-        await $application->run( ApplicationContext::fromArray($argv) );
+        await $application->run($argv);
     }
 }

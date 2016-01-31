@@ -3,11 +3,15 @@
 namespace hhpack\typesafety\spec;
 
 use hhpack\typesafety\Arguments;
+use hhpack\typesafety\ArgumentOptions;
 use hhpack\typesafety\ApplicationContext;
 
 describe(ApplicationContext::class, function() {
   beforeEach(function() {
-    $this->context = ApplicationContext::fromArray([ 'script.hh' ]);
+    $this->context = new ApplicationContext(
+      new Arguments(),
+      new ArgumentOptions()
+    );
   });
   describe('#rootDirectory', function() {
     it('return root directory instance', function() {

@@ -12,11 +12,51 @@
 namespace hhpack\typesafety;
 
 use hhpack\typechecker\TypeCheckerClient;
+use hhpack\getopt as cli;
+use hhpack\getopt\app\ApplicationSpec;
 
 final class Application
 {
 
-    public async function run(Context $context) : Awaitable<void>
+    const NAME = 'typesafety';
+    const VERSION = '0.5.0';
+
+    private ApplicationSpec $spec;
+
+    public function __construct()
+    {
+        $this->spec = cli\app(static::NAME)
+            ->usage("  {app.name} [OPTIONS] [DIRECTORY]\n\n")
+            ->version(static::VERSION)
+            ->options([
+                cli\bool_option('help', '-h|--help', false, 'display help message'),
+                cli\bool_option('version', '-v|--version', false, 'display version'),
+                cli\string_option('reporter', '-r|--reporter=?', 'text', 'specify the reporter to use')
+            ]);
+    }
+
+    public async function run(Traversable<string> $argv) : Awaitable<void>
+    {
+        $args = ImmVector::fromItems($argv)->skip(1);
+        $result = $this->spec->parse($args);
+
+        $context = new ApplicationContext(
+            Arguments::fromItems($result->arguments()),
+            ArgumentOptions::fromItems($result->options())
+        );
+
+        if ($context->isVersion()) {
+            return $this->spec->displayVersion();
+        }
+
+        if ($context->isHelp()) {
+            return $this->spec->displayHelp();
+        }
+
+        await $this->check($context);
+    }
+
+    public async function check(Context $context) : Awaitable<void>
     {
         $context->started();
 

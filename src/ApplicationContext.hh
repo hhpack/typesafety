@@ -16,6 +16,8 @@ use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
+use hhpack\typesafety\Reporter;
+use hhpack\typesafety\reporter\ReporterLoader;
 
 final class ApplicationContext implements Context
 {
@@ -23,6 +25,7 @@ final class ApplicationContext implements Context
     public function __construct
     (
         private Arguments $args,
+        private ArgumentOptions $options,
         private Output $output = new ConsoleOutput()
     )
     {
@@ -31,6 +34,24 @@ final class ApplicationContext implements Context
     public function rootDirectory() : Path
     {
         return $this->args->getRootDirectory();
+    }
+
+    public function isHelp() : bool
+    {
+        return (bool) $this->options->at('help');
+    }
+
+    public function isVersion() : bool
+    {
+        return (bool) $this->options->at('version');
+    }
+
+    private function reporter() : Reporter
+    {
+        $name = (string) $this->options->at('reporter');
+
+        $loader = new ReporterLoader();
+        return $loader->load($name, [ $this->output ]);
     }
 
     public function started() : void
@@ -43,7 +64,8 @@ final class ApplicationContext implements Context
         if ($result->isError()) {
             $this->output->write(PHP_EOL);
         }
-        $reporter = new TextReporter($this->output);
+
+        $reporter = $this->reporter();
         await $reporter->onStop(new StoppedMessage($result));
     }
 
@@ -56,13 +78,6 @@ final class ApplicationContext implements Context
     {
         $exitCode = $result->isOk() ? 0 : -1;
         exit($exitCode);
-    }
-
-    public static function fromArray(array<string> $argv) : this
-    {
-        return new static(
-            Arguments::fromArray($argv)
-        );
     }
 
 }
