@@ -20,5 +20,5 @@ interface Context
     public function report(Result $result) : Awaitable<void>;
     public function finish() : void;
     public function terminated(Result $result) : void;
-    public static function fromArray(array<string> $argv) : this;
+    public static function fromItems(Argv $argv) : this;
 }

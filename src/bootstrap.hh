@@ -23,9 +23,9 @@ namespace hhpack\typesafety\reporter
 
 namespace hhpack\typesafety
 {
-    async function main(array<string> $argv) : Awaitable<void>
+    async function main(Argv $argv) : Awaitable<void>
     {
         $application = new Application();
-        await $application->run( ApplicationContext::fromArray($argv) );
+        await $application->run( ApplicationContext::fromItems($argv) );
     }
 }

@@ -14,7 +14,7 @@
     "hhpack/typechecker-client": "~0.6",
     "hhpack/publisher": "~0.2",
     "hhpack/color": "~0.3",
-    "hhpack/getopt": "~0.4"
+    "hhpack/getopt": "~0.6"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",

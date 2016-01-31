@@ -40,7 +40,7 @@ final class Arguments
         return $directory;
     }
 
-    public static function fromArray(array<string> $argv) : this
+    public static function fromItems(Argv $argv) : this
     {
         return new static($argv);
     }

@@ -22,21 +22,29 @@ use hhpack\getopt\app\ApplicationSpec;
 final class ApplicationContext implements Context
 {
 
+    const VERSION = '0.5.0';
+
     private ApplicationSpec $spec;
+    private Arguments $args;
+    private ArgumentOptions $options;
 
     public function __construct
     (
-        private Arguments $args,
+        Argv $args,
         private Output $output = new ConsoleOutput()
     )
     {
-        $spec = cli\app('typesafety', '0.1.0');
-        $spec->usage('{app.name} {app.version}')
+        $spec = cli\app('typesafety');
+        $spec->version(static::VERSION)
             ->options([
                 cli\bool_option('help', '-h|--help', false, 'display help message'),
                 cli\bool_option('version', '-v|--version', false, 'display version')
             ]);
         $this->spec = $spec;
+
+        $result = $this->spec->parse($args);
+        $this->args = Arguments::fromItems($result->arguments());
+        $this->options = ArgumentOptions::fromItems($result->options());
     }
 
     public function rootDirectory() : Path
@@ -69,11 +77,9 @@ final class ApplicationContext implements Context
         exit($exitCode);
     }
 
-    public static function fromArray(array<string> $argv) : this
+    public static function fromItems(Argv $argv) : this
     {
-        return new static(
-            Arguments::fromArray($argv)
-        );
+        return new static($argv);
     }
 
 }

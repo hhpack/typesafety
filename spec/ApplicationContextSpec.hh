@@ -7,7 +7,7 @@ use hhpack\typesafety\ApplicationContext;
 
 describe(ApplicationContext::class, function() {
   beforeEach(function() {
-    $this->context = ApplicationContext::fromArray([ 'script.hh' ]);
+    $this->context = ApplicationContext::fromItems([ 'script.hh' ]);
   });
   describe('#rootDirectory', function() {
     it('return root directory instance', function() {
