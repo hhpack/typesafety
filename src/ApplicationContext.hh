@@ -17,9 +17,7 @@ use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
 use hhpack\typesafety\Reporter;
-use hhpack\package;
-use hhpack\package\selector;
-use RuntimeException;
+use hhpack\typesafety\reporter\ReporterLoader;
 
 final class ApplicationContext implements Context
 {
@@ -50,22 +48,10 @@ final class ApplicationContext implements Context
 
     private function reporter() : Reporter
     {
-        $reporterName = (string )$this->options->at('reporter');
-        $pkg = package\package(shape(
-            'namespace' => 'hhpack\\typesafety\\reporter\\',
-            'packageDirectory' => realpath(__DIR__ . '/reporter')
-        ));
+        $name = (string) $this->options->at('reporter');
 
-        $reporter = $pkg->classes(selector\implementsInterface(Reporter::class))
-            ->select(selector\endsWith(ucfirst($reporterName) . 'Reporter'))
-            ->toVector()
-            ->firstValue();
-
-        if ($reporter === null) {
-            throw new RuntimeException('invalid reporter');
-        }
-
-        return $reporter->instantiate([ $this->output ]);
+        $loader = new ReporterLoader();
+        return $loader->load($name, [ $this->output ]);
     }
 
     public function started() : void
@@ -78,7 +64,8 @@ final class ApplicationContext implements Context
         if ($result->isError()) {
             $this->output->write(PHP_EOL);
         }
-        $reporter = new TextReporter($this->output);
+
+        $reporter = $this->reporter();
         await $reporter->onStop(new StoppedMessage($result));
     }
 
