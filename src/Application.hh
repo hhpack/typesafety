@@ -30,7 +30,8 @@ final class Application
             ->version(static::VERSION)
             ->options([
                 cli\bool_option('help', '-h|--help', false, 'display help message'),
-                cli\bool_option('version', '-v|--version', false, 'display version')
+                cli\bool_option('version', '-v|--version', false, 'display version'),
+                cli\string_option('reporter', '-r|--reporter=?', 'text', 'specify the reporter to use')
             ]);
     }
 

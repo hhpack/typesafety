@@ -16,6 +16,10 @@ use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
+use hhpack\typesafety\Reporter;
+use hhpack\package;
+use hhpack\package\selector;
+use RuntimeException;
 
 final class ApplicationContext implements Context
 {
@@ -42,6 +46,26 @@ final class ApplicationContext implements Context
     public function isVersion() : bool
     {
         return (bool) $this->options->at('version');
+    }
+
+    private function reporter() : Reporter
+    {
+        $reporterName = (string )$this->options->at('reporter');
+        $pkg = package\package(shape(
+            'namespace' => 'hhpack\\typesafety\\reporter\\',
+            'packageDirectory' => realpath(__DIR__ . '/reporter')
+        ));
+
+        $reporter = $pkg->classes(selector\implementsInterface(Reporter::class))
+            ->select(selector\endsWith(ucfirst($reporterName) . 'Reporter'))
+            ->toVector()
+            ->firstValue();
+
+        if ($reporter === null) {
+            throw new RuntimeException('invalid reporter');
+        }
+
+        return $reporter->instantiate([ $this->output ]);
     }
 
     public function started() : void
