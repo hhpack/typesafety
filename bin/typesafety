@@ -17,9 +17,9 @@ INSTALLED_SCRIPT=$SCRIPT_DIR/../hhpack/typesafety/bin/typesafety.hh
 HHVM_OPTIONS="-vHack.Lang.LookForTypechecker=0"
 
 if [ -e $VENDOR_SCRIPT ]; then
-  hhvm $HHVM_OPTIONS $VENDOR_SCRIPT $1
+  hhvm $HHVM_OPTIONS $VENDOR_SCRIPT $*
 fi
 
 if [ -e $INSTALLED_SCRIPT ]; then
-  hhvm $HHVM_OPTIONS $INSTALLED_SCRIPT $1
+  hhvm $HHVM_OPTIONS $INSTALLED_SCRIPT $*
 fi
