@@ -16,9 +16,13 @@ use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
+use hhpack\getopt as cli;
+use hhpack\getopt\app\ApplicationSpec;
 
 final class ApplicationContext implements Context
 {
+
+    private ApplicationSpec $spec;
 
     public function __construct
     (
@@ -26,6 +30,13 @@ final class ApplicationContext implements Context
         private Output $output = new ConsoleOutput()
     )
     {
+        $spec = cli\app('typesafety', '0.1.0');
+        $spec->usage('{app.name} {app.version}')
+            ->options([
+                cli\bool_option('help', '-h|--help', false, 'display help message'),
+                cli\bool_option('version', '-v|--version', false, 'display version')
+            ]);
+        $this->spec = $spec;
     }
 
     public function rootDirectory() : Path
