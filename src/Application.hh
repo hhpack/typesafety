@@ -42,11 +42,7 @@ final class Application
             Arguments::fromItems($result->arguments()),
             ArgumentOptions::fromItems($result->options())
         );
-        await $this->check($context);
-    }
 
-    public async function check(Context $context) : Awaitable<void>
-    {
         if ($context->isVersion()) {
             return $this->spec->displayVersion();
         }
@@ -55,6 +51,11 @@ final class Application
             return $this->spec->displayHelp();
         }
 
+        await $this->check($context);
+    }
+
+    public async function check(Context $context) : Awaitable<void>
+    {
         $context->started();
 
         $client = new TypeCheckerClient( $context->rootDirectory() );
