@@ -22,6 +22,7 @@ use hhpack\getopt\app\ApplicationSpec;
 final class ApplicationContext implements Context
 {
 
+    const NAME = 'typesafety';
     const VERSION = '0.5.0';
 
     private ApplicationSpec $spec;
@@ -34,13 +35,12 @@ final class ApplicationContext implements Context
         private Output $output = new ConsoleOutput()
     )
     {
-        $spec = cli\app('typesafety');
-        $spec->version(static::VERSION)
+        $this->spec = cli\app(static::NAME)
+            ->version(static::VERSION)
             ->options([
                 cli\bool_option('help', '-h|--help', false, 'display help message'),
                 cli\bool_option('version', '-v|--version', false, 'display version')
             ]);
-        $this->spec = $spec;
 
         $result = $this->spec->parse($args);
         $this->args = Arguments::fromItems($result->arguments());
