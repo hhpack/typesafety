@@ -38,8 +38,9 @@ final class ApplicationResult
         if ($this->exception === null) {
             return;
         }
-        $output->error($this->exception->getMessage());
-        $output->error($this->exception->getTraceAsString());
+        $exception = $this->exception;
+        $output->error($exception->getMessage());
+        $output->error($exception->getTraceAsString());
     }
 
     public static function Ok() : this
