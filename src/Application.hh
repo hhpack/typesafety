@@ -14,6 +14,7 @@ namespace hhpack\typesafety;
 use hhpack\typechecker\TypeCheckerClient;
 use hhpack\getopt as cli;
 use hhpack\getopt\app\ApplicationSpec;
+use hhpack\typesafety\reporter\ReporterNotFoundException;
 
 final class Application
 {
@@ -67,8 +68,12 @@ final class Application
 
         $context->finish();
 
-        await $context->report($result);
-        $context->terminated($result);
+        try {
+            await $context->report($result);
+            $context->terminated(ApplicationResult::Ok());
+        } catch (ReporterNotFoundException $exception) {
+            $context->terminated(ApplicationResult::Error($exception));
+        }
     }
 
 }

@@ -74,8 +74,11 @@ final class ApplicationContext implements Context
         $this->output->info('Type check finished.');
     }
 
-    public function terminated(Result $result) : void
+    public function terminated(ApplicationResult $result) : void
     {
+        if ($result->isError()) {
+            $result->displayError($this->output);
+        }
         $exitCode = $result->isOk() ? 0 : -1;
         exit($exitCode);
     }

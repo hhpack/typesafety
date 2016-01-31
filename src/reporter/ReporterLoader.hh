@@ -13,14 +13,13 @@ namespace hhpack\typesafety\reporter;
 
 use hhpack\package as package;
 use hhpack\package\selector as selector;
-use hhpack\package\Package;
+use hhpack\package\Package as ReporterPackage;
 use hhpack\typesafety\Reporter;
-use RuntimeException;
 
 final class ReporterLoader
 {
 
-    private Package $package;
+    private ReporterPackage $package;
 
     public function __construct()
     {
@@ -40,7 +39,7 @@ final class ReporterLoader
             ->firstValue();
 
         if ($reporter === null) {
-            throw new RuntimeException('invalid reporter');
+            throw new ReporterNotFoundException("Reporter {$reporterName} was not found");
         }
 
         $parameters = ImmVector::fromItems($args)->toValuesArray();
