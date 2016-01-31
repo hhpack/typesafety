@@ -26,6 +26,7 @@ final class Application
     public function __construct()
     {
         $this->spec = cli\app(static::NAME)
+            ->usage("  {app.name} [OPTIONS] [DIRECTORY]\n\n")
             ->version(static::VERSION)
             ->options([
                 cli\bool_option('help', '-h|--help', false, 'display help message'),
