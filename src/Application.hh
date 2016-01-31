@@ -18,6 +18,14 @@ final class Application
 
     public async function run(Context $context) : Awaitable<void>
     {
+        if ($context->isVersion()) {
+            return $context->displayVersion();
+        }
+
+        if ($context->isHelp()) {
+            return $context->displayHelp();
+        }
+
         $context->started();
 
         $client = new TypeCheckerClient( $context->rootDirectory() );

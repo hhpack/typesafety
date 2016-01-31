@@ -52,6 +52,26 @@ final class ApplicationContext implements Context
         return $this->args->getRootDirectory();
     }
 
+    public function isHelp() : bool
+    {
+        return (bool) $this->options->at('help');
+    }
+
+    public function isVersion() : bool
+    {
+        return (bool) $this->options->at('version');
+    }
+
+    public function displayHelp() : void
+    {
+        $this->spec->displayHelp();
+    }
+
+    public function displayVersion() : void
+    {
+        $this->spec->displayVersion();
+    }
+
     public function started() : void
     {
         $this->output->info('Type check started.');

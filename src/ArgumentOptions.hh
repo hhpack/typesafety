@@ -23,6 +23,21 @@ final class ArgumentOptions
         $this->options = new ImmMap($options);
     }
 
+    public function containsKey(string $name) : bool
+    {
+        return $this->options->containsKey($name);
+    }
+
+    public function contains(string $name) : bool
+    {
+        return $this->options->contains($name);
+    }
+
+    public function at(string $name) : mixed
+    {
+        return $this->options->at($name);
+    }
+
     public static function fromItems(KeyedTraversable<string, mixed> $options) : this
     {
         return new static($options);

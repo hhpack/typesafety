@@ -16,6 +16,10 @@ use hhpack\typechecker\check\Result;
 interface Context
 {
     public function rootDirectory() : Path;
+    public function isHelp() : bool;
+    public function isVersion() : bool;
+    public function displayHelp() : void;
+    public function displayVersion() : void;
     public function started() : void;
     public function report(Result $result) : Awaitable<void>;
     public function finish() : void;
