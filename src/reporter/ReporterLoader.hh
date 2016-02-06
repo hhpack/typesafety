@@ -12,30 +12,27 @@
 namespace hhpack\typesafety\reporter;
 
 use hhpack\package as package;
-use hhpack\package\selector as selector;
-use hhpack\package\Package as ReporterPackage;
+use hhpack\package\VendorPackage;
 use hhpack\typesafety\Reporter;
 
 final class ReporterLoader
 {
 
-    private ReporterPackage $package;
+    private VendorPackage $package;
 
     public function __construct()
     {
-        $this->package = package\package(shape(
-            'namespace' => 'hhpack\\typesafety\\reporter\\',
-            'packageDirectory' => realpath(__DIR__)
-        ));
+        $this->package = VendorPackage::fromItems([
+            Pair { 'hhpack\\typesafety\\reporter\\', realpath(__DIR__) }
+        ]);
     }
 
     public function load(string $name, Traversable<mixed> $args = []) : Reporter
     {
         $reporterName = ucfirst($name) . 'Reporter';
 
-        $reporter = $this->package->classes(selector\implementsInterface(Reporter::class))
-            ->select(selector\endsWith($reporterName))
-            ->toImmVector()
+        $reporter = $this->package->classes(package\implementsInterface(Reporter::class))
+            ->filter(package\endsWith($reporterName))
             ->firstValue();
 
         if ($reporter === null) {
