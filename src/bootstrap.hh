@@ -24,7 +24,7 @@ namespace hhpack\typesafety
 
     async function main(Traversable<string> $argv) : Awaitable<void>
     {
-        $kernel = new Kernel(new Application());
+        $kernel = new CLIKernel(new Application());
         await $kernel->run($argv);
     }
 
