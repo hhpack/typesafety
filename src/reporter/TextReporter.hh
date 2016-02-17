@@ -42,9 +42,9 @@ final class TextReporter implements TypeCheckReporter
     private function displayStatus(StoppedMessage $message) : void
     {
         if ($message->isOk()) {
-            $this->output->success('Type check passed.');
+            $this->output->success('type check passed.');
         } else {
-            $this->output->fail("Type checker found %d errors.", $message->errorCount());
+            $this->output->fail("type checker found %d errors.", $message->errorCount());
         }
     }
 

@@ -54,8 +54,10 @@ final class TypeCheckContext implements ApplicationContext
         $directory = $this->args->getRootDirectory();
         $client = new TypeCheckerClient($directory);
 
+        $this->output->info('type check started');
         await $client->restart();
         $result = await $client->check();
+        $this->output->info('type check finished');
 
         await $this->report($result);
     }
