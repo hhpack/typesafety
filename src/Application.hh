@@ -36,7 +36,7 @@ final class Application
             ]);
     }
 
-    public async function run(Traversable<string> $argv) : Awaitable<void>
+    public async function run(Traversable<string> $argv) : Awaitable<ApplicationResult>
     {
         $args = ImmVector::fromItems($argv)->skip(1);
         $result = $this->spec->parse($args);
@@ -47,17 +47,19 @@ final class Application
         );
 
         if ($context->isVersion()) {
-            return $this->spec->displayVersion();
+            $this->spec->displayVersion();
+            return ApplicationResult::Ok();
         }
 
         if ($context->isHelp()) {
-            return $this->spec->displayHelp();
+            $this->spec->displayHelp();
+            return ApplicationResult::Ok();
         }
 
-        await $this->check($context);
+        return await $this->check($context);
     }
 
-    public async function check(Context $context) : Awaitable<void>
+    public async function check(Context $context) : Awaitable<ApplicationResult>
     {
         $context->started();
 
@@ -70,10 +72,11 @@ final class Application
 
         try {
             await $context->report($result);
-            $context->terminated(ApplicationResult::Ok());
         } catch (ReporterNotFoundException $exception) {
-            $context->terminated(ApplicationResult::Error($exception));
+            return ApplicationResult::Error($exception);
         }
+
+        return ApplicationResult::Ok();
     }
 
 }

@@ -21,9 +21,11 @@ namespace hhpack\typesafety\reporter
 
 namespace hhpack\typesafety
 {
+
     async function main(Traversable<string> $argv) : Awaitable<void>
     {
-        $application = new Application();
-        await $application->run($argv);
+        $kernel = new Kernel(new Application());
+        await $kernel->run($argv);
     }
+
 }
