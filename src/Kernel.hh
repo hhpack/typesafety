@@ -27,8 +27,21 @@ final class Kernel
 
     public async function run(Traversable<string> $argv) : Awaitable<void>
     {
+        $this->started();
         $result = await $this->application->run($argv);
+        $this->finish();
+
         $this->terminated($result);
+    }
+
+    private function started() : void
+    {
+        $this->output->info('Type check started.');
+    }
+
+    private function finish() : void
+    {
+        $this->output->info('Type check finished.');
     }
 
     private function terminated(ApplicationResult $result) : void

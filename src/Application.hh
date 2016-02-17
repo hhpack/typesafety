@@ -61,14 +61,10 @@ final class Application
 
     public async function check(Context $context) : Awaitable<ApplicationResult>
     {
-        $context->started();
-
         $client = new TypeCheckerClient( $context->rootDirectory() );
 
         await $client->restart();
         $result = await $client->check();
-
-        $context->finish();
 
         try {
             await $context->report($result);

@@ -54,11 +54,6 @@ final class ApplicationContext implements Context
         return $loader->load($name, [ $this->output ]);
     }
 
-    public function started() : void
-    {
-        $this->output->info('Type check started.');
-    }
-
     public async function report(Result $result) : Awaitable<void>
     {
         if ($result->isError()) {
@@ -67,20 +62,6 @@ final class ApplicationContext implements Context
 
         $reporter = $this->reporter();
         await $reporter->onStop(new StoppedMessage($result));
-    }
-
-    public function finish() : void
-    {
-        $this->output->info('Type check finished.');
-    }
-
-    public function terminated(ApplicationResult $result) : void
-    {
-        if ($result->isError()) {
-            $result->displayError($this->output);
-        }
-        $exitCode = $result->isOk() ? 0 : -1;
-        exit($exitCode);
     }
 
 }
