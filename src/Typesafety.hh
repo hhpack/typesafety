@@ -40,7 +40,7 @@ final class Typesafety implements Application
         $args = ImmVector::fromItems($argv)->skip(1);
         $result = $this->spec->parse($args);
 
-        $context = new ApplicationContext(
+        $context = new TypeCheckContext(
             Arguments::fromItems($result->arguments()),
             ArgumentOptions::fromItems($result->options())
         );
@@ -58,10 +58,10 @@ final class Typesafety implements Application
         return await $this->check($context);
     }
 
-    public async function check(Context $context) : Awaitable<ApplicationResult>
+    public async function check(ApplicationContext $context) : Awaitable<ApplicationResult>
     {
         try {
-            await $context->check();
+            await $context->execute();
         } catch (ReporterNotFoundException $exception) {
             return ApplicationResult::Error($exception);
         }

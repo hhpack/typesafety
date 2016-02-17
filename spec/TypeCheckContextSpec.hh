@@ -4,13 +4,13 @@ namespace hhpack\typesafety\spec;
 
 use hhpack\typesafety\Arguments;
 use hhpack\typesafety\ArgumentOptions;
-use hhpack\typesafety\ApplicationContext;
+use hhpack\typesafety\TypeCheckContext;
 
-describe(ApplicationContext::class, function() {
+describe(TypeCheckContext::class, function() {
   describe('#isHelp', function() {
     context('when use help option', function() {
       beforeEach(function() {
-        $this->context = new ApplicationContext(
+        $this->context = new TypeCheckContext(
           new Arguments(),
           new ArgumentOptions([ 'help' => true ])
         );
@@ -21,7 +21,7 @@ describe(ApplicationContext::class, function() {
     });
     context('when not use help option', function() {
       beforeEach(function() {
-        $this->context = new ApplicationContext(
+        $this->context = new TypeCheckContext(
           new Arguments(),
           new ArgumentOptions([ 'help' => false ])
         );
@@ -34,7 +34,7 @@ describe(ApplicationContext::class, function() {
   describe('#isVersion', function() {
     context('when use version option', function() {
       beforeEach(function() {
-        $this->context = new ApplicationContext(
+        $this->context = new TypeCheckContext(
           new Arguments(),
           new ArgumentOptions([ 'version' => true ])
         );
@@ -45,7 +45,7 @@ describe(ApplicationContext::class, function() {
     });
     context('when not use version option', function() {
       beforeEach(function() {
-        $this->context = new ApplicationContext(
+        $this->context = new TypeCheckContext(
           new Arguments(),
           new ArgumentOptions([ 'version' => false ])
         );
