@@ -13,12 +13,11 @@ namespace hhpack\typesafety;
 
 use hhpack\typechecker\check\Result;
 use hhpack\typechecker\TypeCheckerClient;
-use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
 use hhpack\typesafety\Output;
-use hhpack\typesafety\Reporter;
 use hhpack\typesafety\reporter\ReporterLoader;
+use hhpack\typesafety\reporter\TextReporter;
 
 final class TypeCheckContext implements ApplicationContext
 {
@@ -42,7 +41,7 @@ final class TypeCheckContext implements ApplicationContext
         return (bool) $this->options->at('version');
     }
 
-    private function loadReporter() : Reporter
+    private function loadReporter() : TypeCheckReporter
     {
         $name = (string) $this->options->at('reporter');
 

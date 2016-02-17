@@ -13,7 +13,7 @@ namespace hhpack\typesafety\reporter;
 
 use hhpack\package as package;
 use hhpack\package\VendorPackage;
-use hhpack\typesafety\Reporter;
+use hhpack\typesafety\TypeCheckReporter;
 
 final class ReporterLoader
 {
@@ -27,11 +27,11 @@ final class ReporterLoader
         ]);
     }
 
-    public function load(string $name, Traversable<mixed> $args = []) : Reporter
+    public function load(string $name, Traversable<mixed> $args = []) : TypeCheckReporter
     {
         $reporterName = ucfirst($name) . 'Reporter';
 
-        $reporter = $this->package->classes(package\implementsInterface(Reporter::class))
+        $reporter = $this->package->classes(package\implementsInterface(TypeCheckReporter::class))
             ->filter(package\endsWith($reporterName))
             ->firstValue();
 
