@@ -11,11 +11,7 @@
 
 namespace hhpack\typesafety;
 
-use hhpack\typechecker\check\Result;
-
-interface ApplicationContext
+interface Kernel
 {
-    public function isHelp() : bool;
-    public function isVersion() : bool;
-    public function execute() : Awaitable<void>;
+    public function run(Traversable<string> $argv) : Awaitable<void>;
 }
