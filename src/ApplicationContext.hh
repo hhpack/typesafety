@@ -12,6 +12,7 @@
 namespace hhpack\typesafety;
 
 use hhpack\typechecker\check\Result;
+use hhpack\typechecker\TypeCheckerClient;
 use hhpack\typesafety\reporter\TextReporter;
 use hhpack\typesafety\message\StoppedMessage;
 use hhpack\typesafety\output\ConsoleOutput;
@@ -31,11 +32,6 @@ final class ApplicationContext implements Context
     {
     }
 
-    public function rootDirectory() : Path
-    {
-        return $this->args->getRootDirectory();
-    }
-
     public function isHelp() : bool
     {
         return (bool) $this->options->at('help');
@@ -46,7 +42,7 @@ final class ApplicationContext implements Context
         return (bool) $this->options->at('version');
     }
 
-    private function reporter() : Reporter
+    private function loadReporter() : Reporter
     {
         $name = (string) $this->options->at('reporter');
 
@@ -54,13 +50,24 @@ final class ApplicationContext implements Context
         return $loader->load($name, [ $this->output ]);
     }
 
-    public async function report(Result $result) : Awaitable<void>
+    public async function check() : Awaitable<void>
+    {
+        $directory = $this->args->getRootDirectory();
+        $client = new TypeCheckerClient($directory);
+
+        await $client->restart();
+        $result = await $client->check();
+
+        await $this->report($result);
+    }
+
+    private async function report(Result $result) : Awaitable<void>
     {
         if ($result->isError()) {
             $this->output->write(PHP_EOL);
         }
 
-        $reporter = $this->reporter();
+        $reporter = $this->loadReporter();
         await $reporter->onStop(new StoppedMessage($result));
     }
 

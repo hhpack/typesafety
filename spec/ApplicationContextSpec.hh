@@ -7,16 +7,52 @@ use hhpack\typesafety\ArgumentOptions;
 use hhpack\typesafety\ApplicationContext;
 
 describe(ApplicationContext::class, function() {
-  beforeEach(function() {
-    $this->context = new ApplicationContext(
-      new Arguments(),
-      new ArgumentOptions()
-    );
+  describe('#isHelp', function() {
+    context('when use help option', function() {
+      beforeEach(function() {
+        $this->context = new ApplicationContext(
+          new Arguments(),
+          new ArgumentOptions([ 'help' => true ])
+        );
+      });
+      it('return true', function() {
+        expect( $this->context->isHelp() )->toBeTrue();
+      });
+    });
+    context('when not use help option', function() {
+      beforeEach(function() {
+        $this->context = new ApplicationContext(
+          new Arguments(),
+          new ArgumentOptions([ 'help' => false ])
+        );
+      });
+      it('return false', function() {
+        expect( $this->context->isHelp() )->toBeFalse();
+      });
+    });
   });
-  describe('#rootDirectory', function() {
-    it('return root directory instance', function() {
-      $path = $this->context->rootDirectory();
-      expect($path)->toBe((string) getcwd());
+  describe('#isVersion', function() {
+    context('when use version option', function() {
+      beforeEach(function() {
+        $this->context = new ApplicationContext(
+          new Arguments(),
+          new ArgumentOptions([ 'version' => true ])
+        );
+      });
+      it('return true', function() {
+        expect( $this->context->isVersion() )->toBeTrue();
+      });
+    });
+    context('when not use version option', function() {
+      beforeEach(function() {
+        $this->context = new ApplicationContext(
+          new Arguments(),
+          new ArgumentOptions([ 'version' => false ])
+        );
+      });
+      it('return false', function() {
+        expect( $this->context->isVersion() )->toBeFalse();
+      });
     });
   });
 });

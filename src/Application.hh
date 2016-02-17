@@ -11,7 +11,6 @@
 
 namespace hhpack\typesafety;
 
-use hhpack\typechecker\TypeCheckerClient;
 use hhpack\getopt as cli;
 use hhpack\getopt\app\ApplicationSpec;
 use hhpack\typesafety\reporter\ReporterNotFoundException;
@@ -61,13 +60,8 @@ final class Application
 
     public async function check(Context $context) : Awaitable<ApplicationResult>
     {
-        $client = new TypeCheckerClient( $context->rootDirectory() );
-
-        await $client->restart();
-        $result = await $client->check();
-
         try {
-            await $context->report($result);
+            await $context->check();
         } catch (ReporterNotFoundException $exception) {
             return ApplicationResult::Error($exception);
         }
