@@ -14,7 +14,7 @@ VENDOR_SCRIPT=$SCRIPT_DIR/typesafety.hh
 # Script path for composer
 INSTALLED_SCRIPT=$SCRIPT_DIR/../hhpack/typesafety/bin/typesafety.hh
 
-HHVM_OPTIONS="-vHack.Lang.LookForTypechecker=0"
+HHVM_OPTIONS="-vHack.Lang.LookForTypechecker=0 -vEval.Jit=0"
 
 if [ -e $VENDOR_SCRIPT ]; then
   hhvm $HHVM_OPTIONS $VENDOR_SCRIPT $*
