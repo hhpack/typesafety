@@ -19,7 +19,7 @@ final class Typesafety implements Application
 {
 
     const NAME = 'typesafety';
-    const VERSION = '0.7.0';
+    const VERSION = '0.7.3';
 
     private ApplicationSpec $spec;
 
