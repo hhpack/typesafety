@@ -18,8 +18,8 @@ use hhpack\typesafety\reporter\ReporterNotFoundException;
 final class Typesafety implements Application
 {
 
-    const NAME = 'typesafety';
-    const VERSION = '0.7.3';
+    const string NAME = 'typesafety';
+    const string VERSION = '0.7.4';
 
     private ApplicationSpec $spec;
 
