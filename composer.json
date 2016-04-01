@@ -15,7 +15,7 @@
     "hhpack/publisher": "~0.4",
     "hhpack/color": "~0.7",
     "hhpack/getopt": "~0.6",
-    "hhpack/package": "~0.11"
+    "hhpack/package": "~0.12"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
