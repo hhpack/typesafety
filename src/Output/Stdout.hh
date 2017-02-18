@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety\output;
+namespace HHPack\Typesafety\Output;
 
-use hhpack\typesafety\Writable;
+use HHPack\Typesafety\Writable;
 
 final class Stdout implements Writable<string>
 {

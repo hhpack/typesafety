@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety;
+namespace HHPack\Typesafety;
 
-use hhpack\typechecker\check\Result;
-use hhpack\publisher\Message as TypeCheckMessage;
-use hhpack\typesafety\message\StoppedMessage;
-use hhpack\publisher\Subscribable;
+use HHPack\Publisher\Message as TypeCheckMessage;
+use HHPack\Publisher\Subscribable;
+use HHPack\TypeChecker\Check\Result;
+use HHPack\Typesafety\Message\StoppedMessage;
 
 interface TypeCheckReporter extends Subscribable<TypeCheckMessage>
 {

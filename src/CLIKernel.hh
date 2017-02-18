@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,10 +9,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety;
+namespace HHPack\Typesafety;
 
-use hhpack\typesafety\Output;
-use hhpack\typesafety\output\ConsoleOutput;
+use HHPack\Typesafety\Output;
+use HHPack\Typesafety\Output\ConsoleOutput;
 
 final class CLIKernel implements Kernel
 {

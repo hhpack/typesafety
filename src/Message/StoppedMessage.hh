@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety\message;
+namespace HHPack\Typesafety\Message;
 
-use hhpack\publisher\Message;
-use hhpack\typechecker\check\Result;
-use hhpack\typechecker\check\Error;
+use HHPack\Publisher\Message;
+use HHPack\TypeChecker\Check\Result;
+use HHPack\TypeChecker\Check\Error;
 use Generator;
 
 final class StoppedMessage implements Message

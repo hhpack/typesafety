@@ -1,12 +1,12 @@
 <?hh //partial
 
-namespace hhpack\typesafety\spec\reporter;
+namespace HHPack\Typesafety\Spec\Reporter;
 
-use hhpack\typechecker\check\Result;
-use hhpack\typechecker\check\TypeCheckReportDecoder;
-use hhpack\typesafety\reporter\TextReporter;
-use hhpack\typesafety\message\StoppedMessage;
-use hhpack\typesafety\output\ConsoleOutput;
+use HHPack\TypeChecker\Check\Result;
+use HHPack\TypeChecker\Check\TypeCheckReportDecoder;
+use HHPack\Typesafety\Reporter\TextReporter;
+use HHPack\Typesafety\Message\StoppedMessage;
+use HHPack\Typesafety\Output\ConsoleOutput;
 
 describe(TextReporter::class, function() {
   beforeEach(function() {

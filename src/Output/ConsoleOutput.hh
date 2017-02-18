@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,12 +9,12 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety\output;
+namespace HHPack\Typesafety\Output;
 
-use hhpack\typesafety\Output;
-use hhpack\color\Color;
-use hhpack\color\StyleType;
-use hhpack\color\ForegroundColor;
+use HHPack\Typesafety\Output;
+use HHPack\Color\Color;
+use HHPack\Color\StyleType;
+use HHPack\Color\ForegroundColor;
 
 final class ConsoleOutput implements Output
 {

@@ -1,10 +1,10 @@
 <?hh //partial
 
-namespace hhpack\typesafety\spec;
+namespace HHPack\Typesafety\Spec;
 
-use hhpack\typesafety\Arguments;
-use hhpack\typesafety\ArgumentOptions;
-use hhpack\typesafety\TypeCheckContext;
+use HHPack\Typesafety\Arguments;
+use HHPack\Typesafety\ArgumentOptions;
+use HHPack\Typesafety\TypeCheckContext;
 
 describe(TypeCheckContext::class, function() {
   describe('#isHelp', function() {

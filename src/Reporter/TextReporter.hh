@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,16 +9,16 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety\reporter;
+namespace HHPack\Typesafety\Reporter;
 
-use hhpack\typechecker\check\Result;
-use hhpack\typechecker\check\Error;
-use hhpack\typechecker\check\Message;
-use hhpack\publisher\Message as TypeCheckMessage;
-use hhpack\publisher\Subscribable;
-use hhpack\typesafety\message\StoppedMessage;
-use hhpack\typesafety\TypeCheckReporter;
-use hhpack\typesafety\Output;
+use HHPack\TypeChecker\Check\Result;
+use HHPack\TypeChecker\Check\Error;
+use HHPack\TypeChecker\Check\Message;
+use HHPack\Publisher\Message as TypeCheckMessage;
+use HHPack\Publisher\Subscribable;
+use HHPack\Typesafety\Message\StoppedMessage;
+use HHPack\Typesafety\TypeCheckReporter;
+use HHPack\Typesafety\Output;
 
 final class TextReporter implements TypeCheckReporter
 {
@@ -103,7 +103,7 @@ final class TextReporter implements TypeCheckReporter
 
     private function display(string $format, ...) : void
     {
-        $args = Vector { $format };
+        $args = Vector {};
         $args->addAll(func_get_args());
         call_user_func_array($this->errorPrinter, $args->toValuesArray());
     }

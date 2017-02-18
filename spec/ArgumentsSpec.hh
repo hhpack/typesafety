@@ -1,8 +1,8 @@
 <?hh //partial
 
-namespace hhpack\typesafety\spec;
+namespace HHPack\Typesafety\Spec;
 
-use hhpack\typesafety\Arguments;
+use HHPack\Typesafety\Arguments;
 
 describe(Arguments::class, function() {
   describe('#getRootDirectory', function() {

@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,15 +9,15 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety;
+namespace HHPack\Typesafety;
 
-use hhpack\typechecker\check\Result;
-use hhpack\typechecker\TypeCheckerClient;
-use hhpack\typesafety\message\StoppedMessage;
-use hhpack\typesafety\output\ConsoleOutput;
-use hhpack\typesafety\Output;
-use hhpack\typesafety\reporter\ReporterLoader;
-use hhpack\typesafety\reporter\TextReporter;
+use HHPack\TypeChecker\Check\Result;
+use HHPack\TypeChecker\TypeCheckerClient;
+use HHPack\Typesafety\Message\StoppedMessage;
+use HHPack\Typesafety\Output\ConsoleOutput;
+use HHPack\Typesafety\Output;
+use HHPack\Typesafety\Reporter\ReporterLoader;
+use HHPack\Typesafety\Reporter\TextReporter;
 
 final class TypeCheckContext implements ApplicationContext
 {
