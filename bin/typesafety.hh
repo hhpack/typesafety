@@ -1,7 +1,7 @@
 #!/usr/bin/env hhvm
 <?hh //partial
 
-namespace hhpack\typesafety;
+namespace HHPack\Typesafety;
 
 $autoloadFiles = [
     __DIR__ . '/../../../autoload.php',

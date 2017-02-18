@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety\reporter;
+namespace HHPack\Typesafety\Reporter;
 
-use hhpack\package as package;
-use hhpack\package\VendorPackage;
-use hhpack\typesafety\TypeCheckReporter;
+use HHPack\Package as package;
+use HHPack\Package\VendorPackage;
+use HHPack\Typesafety\TypeCheckReporter;
 
 final class ReporterLoader
 {

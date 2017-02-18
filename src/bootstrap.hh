@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\typesafety package.
+ * This file is part of hhack/typesafety package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,17 +9,17 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\typesafety
+namespace HHPack\Typesafety
 {
     type Path = string;
 }
 
-namespace hhpack\typesafety\reporter
+namespace HHPack\Typesafety\Reporter
 {
     type Path = string;
 }
 
-namespace hhpack\typesafety
+namespace HHPack\Typesafety
 {
 
     async function main(Traversable<string> $argv) : Awaitable<void>

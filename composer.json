@@ -11,11 +11,11 @@
   "license": "MIT",
   "require": {
     "hhvm": ">=3.12.0",
-    "hhpack/typechecker-client": "~0.6",
-    "hhpack/publisher": "~0.4",
-    "hhpack/color": "~0.7",
-    "hhpack/getopt": "~0.6",
-    "hhpack/package": "~0.12"
+    "hhpack/typechecker-client": "^1.0",
+    "hhpack/publisher": "^1.0",
+    "hhpack/color": "^1.0",
+    "hhpack/getopt": "~0.7",
+    "hhpack/package": "^1.0"
   },
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
@@ -27,7 +27,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "hhpack\\typesafety\\": "src/"
+      "HHPack\\Typesafety\\": "src/"
     },
     "files": [
       "src/bootstrap.hh"
