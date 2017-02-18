@@ -103,7 +103,7 @@ final class TextReporter implements TypeCheckReporter
 
     private function display(string $format, ...) : void
     {
-        $args = Vector { $format };
+        $args = Vector {};
         $args->addAll(func_get_args());
         call_user_func_array($this->errorPrinter, $args->toValuesArray());
     }
